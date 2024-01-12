@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "competitions#index"
+  root "matches#index"
 end
