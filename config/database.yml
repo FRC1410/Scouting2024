@@ -24,6 +24,6 @@ production:
   production:
     <<: *default
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    url: <%= ENV.fetch("DATABASE_URL") { '' } %>
     database: scouting_1410_production
-    
+
