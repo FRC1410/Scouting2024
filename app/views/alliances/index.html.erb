@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Alliances</h1>
+
+<div id="alliances">
+  <% @alliances.each do |alliance| %>
+    <%= render alliance %>
+    <p>
+      <%= link_to "Show this alliance", alliance %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New alliance", new_alliance_path %>

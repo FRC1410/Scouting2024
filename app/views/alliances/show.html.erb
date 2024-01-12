@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @alliance %>
+
+<div>
+  <%= link_to "Edit this alliance", edit_alliance_path(@alliance) %> |
+  <%= link_to "Back to alliances", alliances_path %>
+
+  <%= button_to "Destroy this alliance", @alliance, method: :delete %>
+</div>

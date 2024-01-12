@@ -1,0 +1,5 @@
+<div class="grid-container">
+  <%= turbo_frame_tag "toggle_auto", class: "grid-x grid-margin-x" do %>
+    <%= render "auto_section", match: @match, match_action: @match_action %>
+  <% end %>
+</div>
