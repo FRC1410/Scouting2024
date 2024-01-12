@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   resources :matches do
     resources :match_actions do
       post :score_amp, on: :member
+      post :score_trap, on: :member
       post :score_speaker, on: :member
       post :score_amp_auto, on: :member
       post :score_speaker_auto, on: :member
+      post :score_trap, on: :member
       post :leave, on: :member
       post :toggle_auto, on: :member
     end

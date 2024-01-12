@@ -26,3 +26,15 @@
 <div class="cell small-2">
   <%= button_to("UNDO", score_amp_match_match_action_path(@match.id, @match_action.id, increment: -1), class: "button expanded alert") %>
 </div>
+<div class="cell expanded">
+  TRAP SCORE
+  <%= turbo_frame_tag dom_id(@match_action, :score_trap) do %>
+    <%= @match_action.score_trap %>
+  <% end %>
+</div>
+<div class="cell small-6">
+  <%= button_to("TRAP", score_trap_match_match_action_path(@match.id, @match_action.id, increment: 1), class: "button expanded") %>
+</div>
+<div class="cell small-2">
+  <%= button_to("UNDO", score_trap_match_match_action_path(@match.id, @match_action.id, increment: -1), class: "button expanded alert") %>
+</div>

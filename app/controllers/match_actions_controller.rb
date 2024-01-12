@@ -9,6 +9,7 @@ class MatchActionsController < ApplicationController
   score_speaker
   score_amp_auto
   score_speaker_auto
+  score_trap
   leave
   toggle_auto
 ]
@@ -79,6 +80,10 @@ class MatchActionsController < ApplicationController
 
   def score_speaker
     score(:score_speaker)
+  end
+
+  def score_trap
+    score(:score_trap)
   end
 
   def score_amp

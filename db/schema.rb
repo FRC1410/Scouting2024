@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_12_063726) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_12_162219) do
   create_table "actions", force: :cascade do |t|
     t.string "name"
     t.integer "points"
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_063726) do
     t.datetime "updated_at", null: false
     t.integer "score_speaker_auto", default: 0
     t.integer "score_amp_auto", default: 0
+    t.integer "score_trap", default: 0
     t.index ["match_id"], name: "index_match_actions_on_match_id"
   end
 
