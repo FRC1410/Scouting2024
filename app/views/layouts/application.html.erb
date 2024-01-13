@@ -16,7 +16,6 @@
   <%= session[:user_email] %>
   <%= yield %>
 <% else %>
-<% else %>
   <%= link_to 'Login with Google', '/auth/google_oauth2' %>
 <% end %>
 </body>
