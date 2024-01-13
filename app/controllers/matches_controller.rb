@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  skip_before_action :set_auth
   before_action :set_match, only: %i[ show edit update destroy ]
 
   # GET /matches or /matches.json

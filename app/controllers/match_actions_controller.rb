@@ -30,6 +30,7 @@ class MatchActionsController < ApplicationController
 
   # GET /match_actions/1/edit
   def edit
+    Rails.logger.info('GEEEEEEEEEEEEEEEEEEETS')
   end
 
   # POST /match_actions or /match_actions.json
