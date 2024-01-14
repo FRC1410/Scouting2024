@@ -11,4 +11,5 @@ window.$ = jquery
 
 $(function() {
     $(document).foundation();
+    Turbo.session.drive = false
 })
