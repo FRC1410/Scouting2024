@@ -16,16 +16,17 @@
   <div class="top-bar">
     <div class="top-bar-left">
       <ul class="dropdown menu" data-dropdown-menu>
-        <li class="menu-text"><%= link_to '2024 Scouting', root_path, data: { turbo: false } %></li>
+        <li class="menu-text"><%= link_to '2024 Scouting', root_path %></li>
         <li>
-          <%= link_to 'Competitions', competitions_path, data: { turbo: false } %>
+          <%= link_to 'Competitions', competitions_path %>
         <ul class="menu vertical">
           <% @competitions.each do |competition| %>
-            <li><%= link_to competition.name, competition, data: { turbo: false } %></li>
+            <li><%= link_to competition.name, competition %></li>
           <% end %>
         </ul>
         </li>
-        <li><%= link_to 'Teams', teams_path, data: { turbo: false } %></li>
+        <li><%= link_to 'Teams', teams_path %></li>
+        <li><%= link_to 'Matches', matches_path %></li>
       </ul>
     </div>
     <div class="top-bar-right">
