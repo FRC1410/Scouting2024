@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     session[:user_token] = auth.credentials.token
     session[:user_email] = auth.info.email
-    redirect_to root_path
+    redirect_to session[:return_to] || root_path
   end
 
   def destroy
