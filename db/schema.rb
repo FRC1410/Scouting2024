@@ -70,12 +70,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_230141) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "alliance_id"
     t.integer "alliances_id"
+    t.decimal "alliance"
     t.text "team_type"
     t.text "location"
     t.text "logo"
-    t.index ["alliance_id"], name: "index_teams_on_alliance_id"
     t.index ["alliances_id"], name: "index_teams_on_alliances_id"
   end
 
