@@ -1,6 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @team %>
+<table id="teams" class="hover">
+  <thead>
+  <tr>
+    <th><strong>Name</strong></th>
+    <th><strong>Number</strong></th>
+    <th><strong>Location</strong></th>
+    <th><strong>Type</strong></th>
+    <th><strong>Logo</strong></th>
+  </tr>
+  </thead>
+  <%= render @team %>
+</table>
 
 <div>
   <%= link_to "Edit this team", edit_team_path(@team) %> |

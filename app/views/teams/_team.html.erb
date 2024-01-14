@@ -1,18 +1,18 @@
 <tr id="<%= dom_id team %>">
   <td>
-    <%= team.number %>
+    <%= link_to(team.number, team) %>
   </td>
 
   <td>
-    <%= team.name %>
+    <%= link_to(team.name, team) %>
   </td>
 
   <td>
-    <%= team.location %>
+    <%= link_to(team.location, team) %>
   </td>
 
   <td>
-    <%= team.team_type %>
+    <%= link_to(team.team_type, team) %>
   </td>
   <td>
     <img src="<%= team.logo %>"/>
