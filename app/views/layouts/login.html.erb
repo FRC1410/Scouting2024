@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scouting1410</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
 <a href="<%= url_for('/auth/google_oauth2') %>">
   <div class="grid-container grid-container-padded">
     <div class="grid-x grid-padding-x align-center-middle" style="height: 400px">
@@ -20,3 +33,5 @@
     </div>
   </div>
 </a>
+</body>
+</html>

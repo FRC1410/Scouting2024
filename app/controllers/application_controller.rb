@@ -1,17 +1,18 @@
 class ApplicationController < ActionController::Base
-  prepend_before_action :set_auth, :get_comps
+  prepend_before_action :set_auth
+
+  before_action :get_comps
 
   private
 
   def set_auth
-    unless session[:user_token].present?
+    p '!' * 100
+    p ENV['AUTH_ENABLED']
+    unless session[:user_token].present? || ENV['AUTH_ENABLED'] == 'false'
       session[:return_to] = request.original_fullpath
-      response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-      response.headers["Pragma"] = "no-cache"
-      response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
-      render('layouts/login')
+      render 'layouts/login', layout: 'layouts/login'
     end
-    @user_name = session[:user_email]
+    @user_name = session[:user_email] || "A Random Kraken"
   end
 
   def get_comps
