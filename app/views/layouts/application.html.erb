@@ -12,8 +12,32 @@
 
 <body>
 <% if session[:user_token] %>
-  <%= link_to 'Logout', '/logout' %>
-  <%= session[:user_email] %>
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li class="menu-text"><%= link_to '2024 Scouting', root_path, data: { turbo: false }%></li>
+        <li>
+          <a href="#">Competitions</a>
+          <ul class="menu vertical">
+            <% @competitions.each do |competition| %>
+              <li><%= link_to competition.name, competition, data: { turbo: false } %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li><%= link_to 'Teams', teams_path, data: { turbo: false } %></li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li>
+          <%= session[:user_email] %></li>
+        <li>
+          <%= link_to 'Logout', '/logout' %>
+        </li>
+      </ul>
+    </div>
+  </div>
   <%= yield %>
 <% else %>
   <a href="<%= url_for('/auth/google_oauth2') %>">

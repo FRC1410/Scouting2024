@@ -1,5 +1,9 @@
 require 'csv'
 
+Competition.destroy_all
+Competition.create(name: 'Utah')
+Competition.create(name: 'Houston')
+
 MatchAction.destroy_all
 Match.destroy_all
 5.times do

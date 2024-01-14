@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  prepend_before_action :set_auth
+  prepend_before_action :set_auth, :get_comps
 
   private
 
@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
     @user_name = session[:user_email]
+  end
+
+  def get_comps
+    @competitions = Competition.all
   end
 end
