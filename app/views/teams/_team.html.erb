@@ -1,17 +1,22 @@
-<div id="<%= dom_id team %>">
-  <p>
-    <strong>Name:</strong>
-    <%= team.name %>
-  </p>
-
-  <p>
-    <strong>Number:</strong>
+<tr id="<%= dom_id team %>">
+  <td>
     <%= team.number %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Alliance:</strong>
-    <%= team.alliance_id %>
-  </p>
+  <td>
+    <%= team.name %>
+  </td>
 
-</div>
+  <td>
+    <%= team.location %>
+  </td>
+
+  <td>
+    <%= team.team_type %>
+  </td>
+  <td>
+    <img src="<%= team.logo %>"/>
+  </td>
+
+
+</tr>
