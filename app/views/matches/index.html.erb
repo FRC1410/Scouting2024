@@ -2,13 +2,16 @@
 
 <h1>Matches</h1>
 
-<div id="matches">
+<%= link_to "New match", new_match_path, class: "button" %>
+<table id="matches" class="hover">
+  <thead>
+  <tr>
+    <th><strong>Number</strong></th>
+    <th></th>
+  </tr>
+  </thead>
   <% @matches.each do |match| %>
     <%= render match %>
-    <p>
-      <%= link_to "Score this match", edit_match_match_action_path(match, match.match_action), class: "button" %>
-    </p>
   <% end %>
-</div>
+</table>
 
-<%= link_to "New match", new_match_path %>

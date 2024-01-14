@@ -2,13 +2,17 @@
 
 <h1>Competitions</h1>
 
-<div id="competitions">
+<table id="competitions" class="hover">
+  <thead>
+  <tr>
+    <th><strong>Name</strong></th>
+    <th><strong>Date</strong></th>
+    <th></th>
+  </tr>
+  </thead>
   <% @competitions.each do |competition| %>
     <%= render competition %>
-    <p>
-      <%= link_to "Show this competition", competition %>
-    </p>
   <% end %>
-</div>
+</table>
 
 <%= link_to "New competition", new_competition_path %>

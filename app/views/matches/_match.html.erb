@@ -1,7 +1,8 @@
-<div id="<%= dom_id match %>">
-  <p>
-    <strong>Match Number</strong>
+<tr id="<%= dom_id match %>">
+  <td>
     <%= match.id %>
-  </p>
-
-</div>
+  </td>
+  <td>
+    <%= link_to "Scout", edit_match_match_action_path(match, match.match_action), class: "button" %>
+  </td>
+</tr>
