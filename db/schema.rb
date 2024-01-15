@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_230141) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_15_032719) do
   create_table "actions", force: :cascade do |t|
     t.string "name"
     t.integer "points"
@@ -32,12 +32,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_230141) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
-  create_table "alliances", force: :cascade do |t|
-    t.string "name"
-    t.integer "competition_id", null: false
+  create_table "alliance_teams", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "alliance_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_alliances_on_competition_id"
+    t.index ["alliance_id"], name: "index_alliance_teams_on_alliance_id"
+    t.index ["team_id"], name: "index_alliance_teams_on_team_id"
+  end
+
+  create_table "alliances", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "color", null: false
   end
 
   create_table "competitions", force: :cascade do |t|
@@ -63,6 +71,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_230141) do
   create_table "matches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "match_number"
+    t.integer "red_alliance_id"
+    t.integer "blue_alliance_id"
+    t.index ["blue_alliance_id"], name: "index_matches_on_blue_alliance_id"
+    t.index ["red_alliance_id"], name: "index_matches_on_red_alliance_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -78,6 +91,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_230141) do
     t.index ["alliances_id"], name: "index_teams_on_alliances_id"
   end
 
-  add_foreign_key "alliances", "competitions"
+  add_foreign_key "alliance_teams", "alliances"
+  add_foreign_key "alliance_teams", "teams"
   add_foreign_key "match_actions", "matches"
+  add_foreign_key "matches", "alliances", column: "blue_alliance_id"
+  add_foreign_key "matches", "alliances", column: "red_alliance_id"
 end
