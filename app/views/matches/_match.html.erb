@@ -4,5 +4,6 @@
   </td>
   <td>
     <%= link_to "Scout", edit_match_match_action_path(match, match.match_action), class: "button" %>
+    <%= link_to "Team Score Sheet", edit_match_team_score_sheet_path(match, match.red_alliance.team_score_sheets.first), class: "button" %>
   </td>
 </tr>

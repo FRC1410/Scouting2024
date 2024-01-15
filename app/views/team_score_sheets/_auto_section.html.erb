@@ -1,0 +1,50 @@
+<div class="cell small-5"></div>
+<div class="cell small-6">
+  SCORE LEAVE
+  <%= form_with(url: leave_match_team_score_sheet_path(@match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "LEAVE",
+            @team_score_sheet.leave?,
+            @team_score_sheet.leave?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "leave",
+            id: "leave"
+          )
+      %>
+      <label class="switch-paddle" for="leave">
+        <span class="show-for-sr">LEAVE</span>
+        <span class="switch-active" aria-hidden="true">Yes</span>
+        <span class="switch-inactive" aria-hidden="true">No</span>
+      </label>
+    </div>
+  <% end %>
+</div>
+<div class="cell expanded">
+  AUTO SPEAKER SCORE
+  <%= turbo_frame_tag dom_id(@team_score_sheet, :score_speaker_auto) do %>
+    <%= @team_score_sheet.score_speaker_auto %>
+  <% end %>
+</div>
+<div class="cell small-6">
+  <%= button_to("AUTO SPEAKER", score_speaker_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+</div>
+<div class="cell small-2">
+  <%= button_to("UNDO", score_speaker_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+</div>
+<div class="cell expanded">
+  AUTO AMP SCORE
+  <%= turbo_frame_tag dom_id(@team_score_sheet, :score_amp_auto) do %>
+    <%= @team_score_sheet.score_amp_auto %>
+  <% end %>
+</div>
+<div class="cell small-6">
+  <%= button_to("AUTO AMP", score_amp_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+</div>
+<div class="cell small-2">
+  <%= button_to("UNDO", score_amp_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+</div>
+<div class="cell large-10">
+  <%= button_to("END AUTO", toggle_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded") %>
+</div>

@@ -16,9 +16,21 @@ Rails.application.routes.draw do
       post :leave, on: :member
       post :toggle_auto, on: :member
     end
+
+    resources :team_score_sheets do
+      post :score_amp, on: :member
+      post :score_trap, on: :member
+      post :score_speaker, on: :member
+      post :score_amp_auto, on: :member
+      post :score_speaker_auto, on: :member
+      post :score_trap, on: :member
+      post :leave, on: :member
+      post :toggle_auto, on: :member
+    end
   end
-  resources :teams
+
   resources :alliances
+  resources :teams
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
