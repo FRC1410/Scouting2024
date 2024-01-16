@@ -8,7 +8,6 @@ class AddDetailsToMatches < ActiveRecord::Migration[7.1]
     end
 
     add_column :matches, :match_number, :integer
-    remove_column :alliances, :competitions_id, :integer
     remove_column :alliances, :competition_id, :integer
 
     change_table :alliances do |table|
