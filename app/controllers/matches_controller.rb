@@ -1,10 +1,11 @@
 class MatchesController < ApplicationController
+  before_action :set_competition, only: %i[ index create ]
   before_action :set_match, only: %i[ edit update destroy ]
 
   # GET /matches or /matches.json
   def index
-    @matches = Match.all
-    @match = Match.new
+    @matches = @competition.matches
+    @match = Match.new(competition: @competition)
   end
 
   # GET /matches/1/edit
@@ -16,6 +17,7 @@ class MatchesController < ApplicationController
     red_alliance = Alliance.new(color: :red, teams: Team.find(params[:match][:red_alliance_teams].reject(&:blank?)))
     blue_alliance = Alliance.new(color: :blue, teams: Team.find(params[:match][:blue_alliance_teams].reject(&:blank?)))
     @match = Match.new(
+      competition: @competition,
       match_number: params[:match][:match_number],
       red_alliance: red_alliance,
       blue_alliance: blue_alliance
@@ -29,7 +31,7 @@ class MatchesController < ApplicationController
           render turbo_stream: turbo_stream.update(
             "toggle_new",
             partial: "matches/form",
-            locals: { match: Match.new }
+            locals: { match: Match.new(competition: @competition), competition: @competition}
           )
         end
       else
@@ -39,7 +41,7 @@ class MatchesController < ApplicationController
           render turbo_stream: turbo_stream.update(
             "toggle_new",
             partial: "matches/form",
-            locals: { match: @match }
+            locals: { match: @match, competition: @competition }
           )
         end
       end
@@ -71,7 +73,10 @@ class MatchesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def set_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
   def set_match
     @match = Match.find(params[:id])
   end

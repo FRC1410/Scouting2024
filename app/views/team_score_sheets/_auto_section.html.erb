@@ -1,7 +1,7 @@
 <div class="cell small-5"></div>
 <div class="cell small-6">
   SCORE LEAVE
-  <%= form_with(url: leave_match_team_score_sheet_path(@match.id, @team_score_sheet.id)) do |form| %>
+  <%= form_with(url: leave_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
       <%= check_box_tag(
             "LEAVE",
@@ -28,10 +28,10 @@
   <% end %>
 </div>
 <div class="cell small-6">
-  <%= button_to("AUTO SPEAKER", score_speaker_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+  <%= button_to("AUTO SPEAKER", score_speaker_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
 </div>
 <div class="cell small-2">
-  <%= button_to("UNDO", score_speaker_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+  <%= button_to("UNDO", score_speaker_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
 </div>
 <div class="cell expanded">
   AUTO AMP SCORE
@@ -40,11 +40,11 @@
   <% end %>
 </div>
 <div class="cell small-6">
-  <%= button_to("AUTO AMP", score_amp_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+  <%= button_to("AUTO AMP", score_amp_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
 </div>
 <div class="cell small-2">
-  <%= button_to("UNDO", score_amp_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+  <%= button_to("UNDO", score_amp_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
 </div>
 <div class="cell large-10">
-  <%= button_to("END AUTO", toggle_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded") %>
+  <%= button_to("END AUTO", toggle_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded") %>
 </div>

@@ -1,7 +1,10 @@
 require 'csv'
 
+TeamScoreSheet.destroy_all
+Match.destroy_all
+Alliance.destroy_all
 Competition.destroy_all
-Competition.create(name: 'Utah')
+utah = Competition.create(name: 'Utah')
 Competition.create(name: 'Houston')
 
 CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true).each do |record|
@@ -10,11 +13,8 @@ CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true)
   Team.find_or_create_by(values)
 end
 
-MatchAction.destroy_all
-TeamScoreSheet.destroy_all
-Match.destroy_all
-Alliance.destroy_all
 Match.create!(
+  competition: utah,
   match_number: 1,
   red_alliance: Alliance.new(
     color: :red,

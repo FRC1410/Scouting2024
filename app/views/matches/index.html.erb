@@ -3,7 +3,7 @@
 <h1>Matches</h1>
 
 <%= turbo_frame_tag "toggle_new" do %>
-  <%= render "form", match: @match %>
+  <%= render "form", match: @match, competition: @match.competition %>
 <% end %>
 
 <table class="hover">

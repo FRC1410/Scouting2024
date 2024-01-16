@@ -1,4 +1,4 @@
-<%= form_with(model: match, data: { turbo: true }) do |form| %>
+<%= form_with(model: match, url: competition_matches_path(match.competition), data: { turbo: true }) do |form| %>
   <div class="grid-x">
     <% if match.errors.any? %>
       <div style="color: red" class="cell expanded">

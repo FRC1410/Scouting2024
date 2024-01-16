@@ -1,5 +1,5 @@
 <div class="cell large-10">
-  <%= button_to("ENABLE AUTO", toggle_auto_match_team_score_sheet_path(@match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") %>
+  <%= button_to("ENABLE AUTO", toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") %>
 </div>
 <div class="cell expanded">
   SPEAKER SCORE
@@ -9,10 +9,10 @@
 </div>
 
 <div class="cell small-6">
-  <%= button_to("SPEAKER", score_speaker_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+  <%= button_to("SPEAKER", score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
 </div>
 <div class="cell small-2">
-  <%= button_to("UNDO", score_speaker_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+  <%= button_to("UNDO", score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
 </div>
 <div class="cell expanded">
   AMP SCORE
@@ -21,10 +21,10 @@
   <% end %>
 </div>
 <div class="cell small-6">
-  <%= button_to("AMP", score_amp_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+  <%= button_to("AMP", score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
 </div>
 <div class="cell small-2">
-  <%= button_to("UNDO", score_amp_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+  <%= button_to("UNDO", score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
 </div>
 <div class="cell expanded">
   TRAP SCORE
@@ -33,8 +33,8 @@
   <% end %>
 </div>
 <div class="cell small-6">
-  <%= button_to("TRAP", score_trap_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
+  <%= button_to("TRAP", score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
 </div>
 <div class="cell small-2">
-  <%= button_to("UNDO", score_trap_match_team_score_sheet_path(@match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
+  <%= button_to("UNDO", score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
 </div>

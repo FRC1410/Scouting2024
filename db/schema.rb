@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_16_064702) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -45,7 +45,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_064702) do
     t.integer "match_number"
     t.integer "red_alliance_id"
     t.integer "blue_alliance_id"
+    t.integer "competition_id", default: 1, null: false
     t.index ["blue_alliance_id"], name: "index_matches_on_blue_alliance_id"
+    t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["red_alliance_id"], name: "index_matches_on_red_alliance_id"
   end
 
@@ -83,6 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_064702) do
 
   add_foreign_key "matches", "alliances", column: "blue_alliance_id"
   add_foreign_key "matches", "alliances", column: "red_alliance_id"
+  add_foreign_key "matches", "competitions"
   add_foreign_key "team_score_sheets", "alliances"
   add_foreign_key "team_score_sheets", "teams"
 end
