@@ -1,6 +1,5 @@
 class Match < ApplicationRecord
   after_create_commit -> { broadcast_prepend_to "matches", partial: "matches/match", locals: { match: self, new: "new" }, target: "matches" }
-  has_one :match_action
   belongs_to :red_alliance, -> { where(color: :red) }, class_name: "Alliance", dependent: :destroy, autosave: true
   belongs_to :blue_alliance, -> { where(color: :blue) }, class_name: "Alliance", dependent: :destroy, autosave: true
 
