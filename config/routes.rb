@@ -4,19 +4,7 @@ Rails.application.routes.draw do
 
   resources :competitions
 
-  resources :actions
   resources :matches,  except: [:new] do
-    resources :match_actions do
-      post :score_amp, on: :member
-      post :score_trap, on: :member
-      post :score_speaker, on: :member
-      post :score_amp_auto, on: :member
-      post :score_speaker_auto, on: :member
-      post :score_trap, on: :member
-      post :leave, on: :member
-      post :toggle_auto, on: :member
-    end
-
     resources :team_score_sheets do
       post :score_amp, on: :member
       post :score_trap, on: :member
@@ -29,7 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :alliances
   resources :teams
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

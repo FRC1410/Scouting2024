@@ -1,14 +1,10 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: %i[ show edit update destroy ]
+  before_action :set_match, only: %i[ edit update destroy ]
 
   # GET /matches or /matches.json
   def index
     @matches = Match.all
     @match = Match.new
-  end
-
-  # GET /matches/1 or /matches/1.json
-  def show
   end
 
   # GET /matches/1/edit
