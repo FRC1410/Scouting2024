@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :competitions
 
   resources :actions
-  resources :matches do
+  resources :matches,  except: [:new] do
     resources :match_actions do
       post :score_amp, on: :member
       post :score_trap, on: :member

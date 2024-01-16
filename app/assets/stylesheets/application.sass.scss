@@ -1,8 +1,14 @@
 // Entry point for your Sass build
+
+@import '../../../node_modules/tom-select/src/scss/tom-select';
 @import "foundation_and_overrides";
 
 $google-blue: #4285f4;
 $button-active-blue: #1669F2;
+
+.new {
+  background-color: #3adb76;
+}
 
 .google-btn {
   width: 184px;

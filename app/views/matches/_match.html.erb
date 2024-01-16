@@ -1,9 +1,15 @@
-<tr id="<%= dom_id match %>">
+<tr id="<%= dom_id match %>" class="<%= new %>">
   <td>
-    <%= match.id %>
+    <%= match.match_number %>
   </td>
   <td>
-    <%= link_to "Scout", edit_match_match_action_path(match, match.match_action), class: "button" %>
-    <%= link_to "Team Score Sheet", edit_match_team_score_sheet_path(match, match.red_alliance.team_score_sheets.first), class: "button" %>
+    <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
+      <%= link_to "Scout #{team_score_sheet.team.number}", edit_match_team_score_sheet_path(match, team_score_sheet), class: "button" %>
+    <% end %>
+  </td>
+  <td>
+    <% match.blue_alliance.team_score_sheets.each do |team_score_sheet| %>
+      <%= link_to "Scout #{team_score_sheet.team.number}", edit_match_team_score_sheet_path(match, team_score_sheet), class: "button" %>
+    <% end %>
   </td>
 </tr>

@@ -2,16 +2,23 @@
 
 <h1>Matches</h1>
 
-<%= link_to "New match", new_match_path, class: "button" %>
-<table id="matches" class="hover">
+<%= turbo_frame_tag "toggle_new" do %>
+  <%= render "form", match: @match %>
+<% end %>
+
+<table class="hover">
   <thead>
   <tr>
     <th><strong>Number</strong></th>
-    <th></th>
+    <th>Red Alliance Teams</th>
+    <th>Blue Alliance Teams</th>
   </tr>
   </thead>
-  <% @matches.each do |match| %>
-    <%= render match %>
+  <tbody id="matches">
+  <%= turbo_stream_from "matches" %>
+  <%= turbo_stream.prepend :matches do %>
+    <%= render @matches, { new: "" } %>
   <% end %>
+  </tbody>
 </table>
 

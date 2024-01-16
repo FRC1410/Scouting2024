@@ -3,7 +3,8 @@
   "private": "true",
   "dependencies": {
     "foundation-sites": "^6.8.1",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "tom-select": "^2.3.1"
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"

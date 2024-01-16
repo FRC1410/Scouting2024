@@ -14,14 +14,14 @@ MatchAction.destroy_all
 TeamScoreSheet.destroy_all
 Match.destroy_all
 Alliance.destroy_all
-Match.create(
-  match_action: MatchAction.new,
+Match.create!(
+  match_number: 1,
   red_alliance: Alliance.new(
     color: :red,
     teams: Team.where(number: [1, 1410, 1619]).all
   ),
   blue_alliance: Alliance.new(
-    color: :red,
+    color: :blue,
     teams: Team.where(number: [1339, 2240, 2945]).all
   )
 )

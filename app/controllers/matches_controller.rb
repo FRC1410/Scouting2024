@@ -4,15 +4,11 @@ class MatchesController < ApplicationController
   # GET /matches or /matches.json
   def index
     @matches = Match.all
+    @match = Match.new
   end
 
   # GET /matches/1 or /matches/1.json
   def show
-  end
-
-  # GET /matches/new
-  def new
-    @match = Match.new
   end
 
   # GET /matches/1/edit
@@ -21,15 +17,35 @@ class MatchesController < ApplicationController
 
   # POST /matches or /matches.json
   def create
-    @match = Match.new(match_action: MatchAction.new)
+    red_alliance = Alliance.new(color: :red, teams: Team.find(params[:match][:red_alliance_teams].reject(&:blank?)))
+    blue_alliance = Alliance.new(color: :blue, teams: Team.find(params[:match][:blue_alliance_teams].reject(&:blank?)))
+    @match = Match.new(
+      match_number: params[:match][:match_number],
+      red_alliance: red_alliance,
+      blue_alliance: blue_alliance
+    )
 
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            "toggle_new",
+            partial: "matches/form",
+            locals: { match: Match.new }
+          )
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            "toggle_new",
+            partial: "matches/form",
+            locals: { match: @match }
+          )
+        end
       end
     end
   end
@@ -58,13 +74,14 @@ class MatchesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_match
-      @match = Match.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def match_params
-      params.require(:match).permit(:red_alliance_id, :blue_alliance_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_match
+    @match = Match.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def match_params
+    params.require(:match).permit(:number, :red_alliance_teams, :blue_alliance_teams)
+  end
 end
