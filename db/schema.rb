@@ -11,20 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.integer "resource_id"
-    t.string "author_type"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
-  end
-
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -45,7 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
     t.integer "match_number"
     t.integer "red_alliance_id"
     t.integer "blue_alliance_id"
-    t.integer "competition_id", default: 1, null: false
+    t.integer "competition_id", default: 11, null: false
     t.index ["blue_alliance_id"], name: "index_matches_on_blue_alliance_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["red_alliance_id"], name: "index_matches_on_red_alliance_id"
@@ -75,12 +61,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "alliances_id"
-    t.decimal "alliance"
     t.text "team_type"
     t.text "location"
     t.text "logo"
-    t.index ["alliances_id"], name: "index_teams_on_alliances_id"
   end
 
   add_foreign_key "matches", "alliances", column: "blue_alliance_id"
