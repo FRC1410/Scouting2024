@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_auth
-    p '!' * 100
-    p ENV['AUTH_ENABLED']
     unless session[:user_token].present? || ENV['AUTH_ENABLED'] == 'false'
       session[:return_to] = request.original_fullpath
       render 'layouts/login', layout: 'layouts/login'
