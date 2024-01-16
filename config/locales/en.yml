@@ -29,3 +29,8 @@
 
 en:
   hello: "Hello world"
+  score_speaker_auto: AUTO SPEAKER
+  score_amp_auto: AUTO AMP
+  score_speaker: SPEAKER
+  score_amp: AMP
+  score_trap: TRAP

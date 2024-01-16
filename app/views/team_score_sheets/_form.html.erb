@@ -1,5 +1,10 @@
 <div class="grid-container">
-  <%= turbo_frame_tag "toggle_auto", class: "grid-x grid-margin-x" do %>
+  <%= turbo_frame_tag "toggle_auto", class: "grid-x grid-margin-x small-margin-collapse" do %>
     <%= render "auto_section", match: @match, team_score_sheet: @team_score_sheet %>
   <% end %>
+</div>
+<div class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <%= link_to "Back to Match List", competition_matches_path(@match.competition), class: "button expanded", form_class: "cell expanded" %>
+  </div>
 </div>

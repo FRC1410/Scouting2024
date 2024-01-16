@@ -1,40 +1,23 @@
-<div class="cell large-10">
+<div class="cell expanded">
   <%= button_to("ENABLE AUTO", toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") %>
 </div>
-<div class="cell expanded">
-  SPEAKER SCORE
-  <%= turbo_frame_tag dom_id(@team_score_sheet, :score_speaker) do %>
-    <%= @team_score_sheet.score_speaker %>
-  <% end %>
-</div>
+<%= render 'score_buttons',
+           score_field: :score_speaker,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
 
-<div class="cell small-6">
-  <%= button_to("SPEAKER", score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
-</div>
-<div class="cell small-2">
-  <%= button_to("UNDO", score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
-</div>
-<div class="cell expanded">
-  AMP SCORE
-  <%= turbo_frame_tag dom_id(@team_score_sheet, :score_amp) do %>
-    <%= @team_score_sheet.score_amp %>
-  <% end %>
-</div>
-<div class="cell small-6">
-  <%= button_to("AMP", score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
-</div>
-<div class="cell small-2">
-  <%= button_to("UNDO", score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
-</div>
-<div class="cell expanded">
-  TRAP SCORE
-  <%= turbo_frame_tag dom_id(@team_score_sheet, :score_trap) do %>
-    <%= @team_score_sheet.score_trap %>
-  <% end %>
-</div>
-<div class="cell small-6">
-  <%= button_to("TRAP", score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1), class: "button expanded") %>
-</div>
-<div class="cell small-2">
-  <%= button_to("UNDO", score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1), class: "button expanded alert") %>
-</div>
+<%= render 'score_buttons',
+           score_field: :score_amp,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
+<%= render 'score_buttons',
+           score_field: :score_trap,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
