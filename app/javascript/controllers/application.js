@@ -1,6 +1,6 @@
 import {Application} from "@hotwired/stimulus"
 import "tom-select"
-import SelectController from "./select_controller";
+import SelectController from "controllers/select_controller";
 const application = Application.start()
 // Configure Stimulus development experience
 application.debug = false
