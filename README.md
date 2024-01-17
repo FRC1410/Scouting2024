@@ -34,3 +34,28 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
   * run `./bin/dev`
   * Go to [http://localhost:3000/](http://localhost:3000/)
   * Reach out on discord if you have any issues or errors.
+
+# RESOURCES #
+
+* I highly recommend you use the ItelliJ based ruby IDE `RubyMine` from [JetBrains](https://www.jetbrains.com/ruby/) which you should have full access to via you educational account. However, VSCode should also be fine. RubyMine has some really nice features for working on Rails projects.
+* 
+* Rails is written in Ruby. Its is a fun language that prioritizes developer happiness. 
+  * https://ruby-doc.org/
+  * https://www.ruby-lang.org/en/documentation/quickstart/
+* Rails was one of the first Model View Controller frameworks. A Model represents the datastore, most often a table in a database. A View is teh visual representation of the data, most often a webpage. A controller hooks the view to the model. We are using Rails 7 which as of this writing is the latest version. (Rails 8 is coming soon)
+  * https://guides.rubyonrails.org/ This talks about how Rails works.
+  * https://api.rubyonrails.org/ this is the API documentation.
+* Of course you can't do anything on the web without JavaScript and CSS. Knowing the basics of those two things is important.
+  * https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  * https://developer.mozilla.org/en-US/docs/Web/CSS
+* On that note, Rails 7 by default uses a lightweight javascript framework called Stimulus. See the `SelectController` in the app for an example.
+  * https://stimulus.hotwired.dev/handbook/introduction
+* Also, Rails 7 uses `Turbo` to do server side rendering of HTML that is then injected into the DOM so the entire page does not need to reload. If you don't know what that means, ask Lew.
+  * https://turbo.hotwired.dev/handbook/introduction
+* CSS is how webpages are made pretty but it can be hard. To help make it easier, we are using a CSS framework called `foundation-sites`.
+  * https://get.foundation/sites/docs/
+  * This has a ton of great video tutorials.
+* Out of the box web forms are not very user friendly. We are using a javascript plugin called `tom-select` to make them fancier.
+  * https://tom-select.js.org/
+
+
