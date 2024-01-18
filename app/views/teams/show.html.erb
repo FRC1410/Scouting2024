@@ -3,8 +3,8 @@
 <table id="teams" class="hover">
   <thead>
   <tr>
-    <th><strong>Name</strong></th>
     <th><strong>Number</strong></th>
+    <th><strong>Name</strong></th>
     <th><strong>Location</strong></th>
     <th><strong>Type</strong></th>
     <th><strong>Logo</strong></th>
@@ -12,6 +12,66 @@
   </thead>
   <%= render @team %>
 </table>
+
+<table>
+  <thead>
+  <tr>
+    <th><strong>Added</strong></th>
+    <th><strong>Log</strong></th>
+  </tr>
+  </thead>
+  <tbody id="team_logs">
+  <% @team.team_logs.each do |team_log| %>
+    <tr>
+      <td>
+        <div>
+          <%= team_log.created_at.strftime("%d/%m/%Y") %>
+        </div>
+        <div>
+          <%= team_log.created_at.strftime("%I:%M:%S") %>
+        </div>
+      </td>
+      <td>
+        <%= team_log.log %>
+      </td>
+    </tr>
+  <% end %>
+  <%= turbo_stream_from "team_logs" %>
+
+  <%= turbo_stream.append :team_logs %>
+  </tbody>
+</table>
+
+<%= form_with(model: team_log = TeamLog.new(team: @team), url: team_team_logs_path(@team), data: { turbo: true }) do |form| %>
+  <% if team_log.errors.any? %>
+    <div style="color: red" class="grid-x">
+      <ul class="cell">
+        <% team_log.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="grid-x grid-padding-x small-up-1 medium-up-5 large-up-4">
+    <div class="cell">
+      <div>
+        <%= form.label :log %>
+      </div>
+      <div>
+        <%= form.text_field :log, tabindex: 0 %>
+      </div>
+    </div>
+
+
+    <div class="cell expanded">
+      <div>&nbsp;</div>
+      <div>
+        <%= form.submit(class: "button") %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 
 <div>
   <%= link_to "Edit this team", edit_team_path(@team) %> |

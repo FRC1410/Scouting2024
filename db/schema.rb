@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_17_221548) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
     t.index ["blue_alliance_id"], name: "index_matches_on_blue_alliance_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["red_alliance_id"], name: "index_matches_on_red_alliance_id"
+  end
+
+  create_table "team_logs", force: :cascade do |t|
+    t.text "log"
+    t.integer "team_id", null: false
+    t.integer "alliance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alliance_id"], name: "index_team_logs_on_alliance_id"
+    t.index ["team_id"], name: "index_team_logs_on_team_id"
   end
 
   create_table "team_score_sheets", force: :cascade do |t|
@@ -69,6 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_072958) do
   add_foreign_key "matches", "alliances", column: "blue_alliance_id"
   add_foreign_key "matches", "alliances", column: "red_alliance_id"
   add_foreign_key "matches", "competitions"
+  add_foreign_key "team_logs", "alliances"
+  add_foreign_key "team_logs", "teams"
   add_foreign_key "team_score_sheets", "alliances"
   add_foreign_key "team_score_sheets", "teams"
 end
