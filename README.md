@@ -10,6 +10,7 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
 
   * I assume you already have `git` since you are seeing this README.
   * First you will need `rbenv`.
+  * On windows do this instead [rbenv windows](https://github.com/ccmywish/rbenv-for-windows)
   * Follow the instructions [here](https://github.com/rbenv/rbenv)
   * The easiest way on a mac is using [homebrew](https://brew.sh/)
   * If you have installed `brew` then run `brew install rben`
@@ -19,9 +20,11 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
         cd ..
         cd -  
     ```
+  * If you are having trouble with `rbenv` or `brew` such as those cammands not showing up even after you install it may be an issue with your shell environment, `zsh`. You are running `zhh` if you see that at the top of your terminal window. Contact Lew if this is the case.
   * Next you will need `yarn` to install the javascript packages.
   * If you installed `brew` then just `brew install yarn`
   * Run `yarn` inside the project directory and you should be g2g.
+  * Next type `bundle` to install gems
   * Next get the local database setup.
   * Run `rake db:create db:migrate db:seed`
   * Finally you need a `.env` inside `Scouting2420`. Create that file and add the following line so that Google Auth is disabled on your local install.
