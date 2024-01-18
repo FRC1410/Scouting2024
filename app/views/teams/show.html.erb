@@ -21,20 +21,9 @@
   </tr>
   </thead>
   <tbody id="team_logs">
+  <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
   <% @team.team_logs.each do |team_log| %>
-    <tr>
-      <td>
-        <div>
-          <%= team_log.created_at.strftime("%d/%m/%Y") %>
-        </div>
-        <div>
-          <%= team_log.created_at.strftime("%I:%M:%S") %>
-        </div>
-      </td>
-      <td>
-        <%= team_log.log %>
-      </td>
-    </tr>
+    <%= render "team_log", team_log: team_log, markdown: markdown %>
   <% end %>
   <%= turbo_stream_from "team_logs" %>
 

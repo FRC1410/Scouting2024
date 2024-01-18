@@ -4,7 +4,8 @@ class TeamLog < ApplicationRecord
                          partial: "teams/team_log",
                          locals: {
                            team_log: self,
-                           team: self.team
+                           team: self.team,
+                           markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML),
                          },
                          target: "team_logs"
   }

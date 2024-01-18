@@ -1,8 +1,13 @@
 <tr>
   <td>
-    <%= team_log.created_at.strftime("%d/%m/%Y, %I:%M:%S") %>
+    <div>
+      <%= team_log.created_at.strftime("%d/%m/%Y") %>
+    </div>
+    <div>
+      <%= team_log.created_at.strftime("%I:%M:%S") %>
+    </div>
   </td>
   <td>
-    <%= team_log.log %>
+    <%== markdown.render(team_log.log.to_s) %>
   </td>
 </tr>

@@ -30,7 +30,7 @@ class TeamLogsController < ApplicationController
           render turbo_stream: turbo_stream.update(
             "toggle_new",
             partial: "teams/team_log",
-            locals: { team_log: @team_log, team: @team}
+            locals: { team_log: @team_log, team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
           )
         end
       else
@@ -40,14 +40,12 @@ class TeamLogsController < ApplicationController
           render turbo_stream: turbo_stream.update(
             "toggle_new",
             partial: "teams/team_log",
-            locals: { team_log: TeamLog.new(team: @team), team: @team }
+            locals: { team_log: TeamLog.new(team: @team), team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
           )
         end
       end
     end
   end
-
-
 
   private
 
