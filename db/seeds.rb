@@ -6,11 +6,14 @@ Alliance.destroy_all
 Competition.destroy_all
 utah = Competition.create(name: 'Utah')
 Competition.create(name: 'Houston')
-
+TeamLog.destroy_all
+Team.destroy_all
 CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true).each do |record|
   values = record.to_h.symbolize_keys
   values.delete(:blank)
-  Team.find_or_create_by(values)
+  if values[:location].match?('USA') and !values[:name].match?('Off-Season Demo Team')
+    Team.find_or_create_by(values)
+  end
 end
 
 Match.create!(
@@ -25,7 +28,41 @@ Match.create!(
     teams: Team.where(number: [1339, 2240, 2945]).all
   )
 )
-TeamLog.destroy_all
+
+200.times do |match_number|
+  alliance_red = Alliance.create!(
+    color: :red,
+    teams: Team.order("RANDOM()").limit(3)
+  )
+  alliance_blue = Alliance.create!(
+    color: :blue,
+    teams: Team.order("RANDOM()").limit(3)
+  )
+  Match.create!(
+    competition: utah,
+    match_number: match_number,
+    red_alliance: alliance_red,
+    blue_alliance: alliance_blue
+  )
+
+  bools = [true, false]
+
+  (alliance_red.team_score_sheets + alliance_blue.team_score_sheets).each do |team_score_sheet|
+    team_score_sheet.update!(
+      leave: bools.sample,
+      score_speaker_auto: Random.rand(30),
+      score_amp_auto: Random.rand(30),
+      score_speaker: Random.rand(30),
+      score_amp: Random.rand(30),
+      score_trap: Random.rand(30),
+      park: bools.sample,
+      onstage: bools.sample,
+      onstage_hinote: bools.sample,
+      harmony: bools.sample,
+    )
+  end
+end
+
 TeamLog.create!(
   log: <<~LOG,
         # Amantem lacerare Peloro succinctae
@@ -48,3 +85,5 @@ TeamLog.create!(
   LOG
   team: Team.find_by(number: 1)
 )
+
+
