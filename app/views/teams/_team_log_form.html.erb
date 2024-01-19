@@ -1,6 +1,6 @@
-<ul class="accordion" data-accordion data-allow-all-closed="true">
+<ul class="accordion" data-accordion data-allow-all-closed="true" data-controller="foundation">
   <li class="accordion-item" data-accordion-item>
-    <a href="#" class="accordion-title" data-turbo="false">Enter Team Logs</a>
+    <a href="#" class="accordion-title" data-turbo="false"><h4> + New Log Entry</h4></a>
     <div class="accordion-content" data-tab-content>
       <%= render "teams/team_log_edit_box", team_log: team_log, team: team, markdown: markdown %>
     </div>

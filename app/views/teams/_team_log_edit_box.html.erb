@@ -14,11 +14,6 @@
     </div>
   <% end %>
   <div class="grid-x grid-padding-x <%= team_log.persisted? ? 'hide' : '' %>" data="click-toggle">
-    <% unless team_log.persisted? %>
-      <div class="cell small-6 medium-10">
-        New Log Entry
-      </div>
-    <% end %>
     <div class="cell small-6 medium-10">
       <%= form.text_area :log,
                          tabindex: 0,
@@ -29,7 +24,7 @@
                          placeholder: "## You can put markdown in here.\n  * Stardate 2024 \n  * Release the Kraken!" %>
     </div>
     <div class="cell small-6 medium-10">
-      <%= form.submit(class: "button expanded") %>
+      <%= form.submit(class: "button expanded", label: "Save") %>
     </div>
   </div>
 <% end %>
