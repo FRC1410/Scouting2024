@@ -11,5 +11,12 @@ window.$ = jquery
 
 $(function() {
     $(document).foundation();
+    $(document).on("turbo:frame-load", () => {
+        console.log('try reinit')
+        Foundation.reInit('accordion');})
+    $(document).on("turbo:frame-missing", () => {
+        console.log('try reinit')
+        Foundation.reInit('accordion');})
+
     Turbo.session.drive = false
 })

@@ -8,6 +8,9 @@
     </div>
   </td>
   <td>
-    <%== markdown.render(team_log.log.to_s) %>
+    <%= turbo_frame_tag "#{dom_id(team_log)}_edit" do %>
+      <%= render "teams/team_log_edit_box", team_log: team_log, team: team, markdown: markdown %>
+    <% end %>
   </td>
 </tr>
+

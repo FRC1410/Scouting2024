@@ -6,6 +6,9 @@
 // Global styles
 @include foundation-global-styles;
 //@include foundation-forms;
+@include foundation-form-prepostfix;
+@include foundation-form-label;
+//@include foundation-form-text;
 @include foundation-typography;
 
 // Grids (choose one)
@@ -59,3 +62,38 @@
 @include foundation-flex-classes;
 @include foundation-visibility-classes;
 // @include foundation-prototype-classes;
+
+textarea {
+  @include form-element;
+  appearance: none;
+}
+
+// Text areas
+textarea {
+  max-width: 100%;
+
+  &[rows] {
+    height: auto;
+  }
+}
+
+textarea {
+  // Disabled/readonly state
+  &:disabled,
+  &[readonly] {
+    background-color: $input-background-disabled;
+    cursor: $input-cursor-disabled;
+  }
+}
+
+// Reset styles on button-like inputs
+[type='submit'],
+[type='button'] {
+  appearance: none;
+  border-radius: $form-button-radius;
+}
+
+// Placeholder text
+::placeholder {
+  color: $input-placeholder-color;
+}

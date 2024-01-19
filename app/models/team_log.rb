@@ -1,6 +1,6 @@
 class TeamLog < ApplicationRecord
   after_create_commit -> {
-    broadcast_append_to "team_logs",
+    broadcast_prepend_to "team_logs",
                          partial: "teams/team_log",
                          locals: {
                            team_log: self,

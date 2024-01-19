@@ -4,10 +4,12 @@ class TeamLogsController < ApplicationController
   show
   edit
   create
+  update
 ]
   before_action :set_team_log, only: %i[
   show
   edit
+  update
 ]
 
   def show
@@ -24,13 +26,13 @@ class TeamLogsController < ApplicationController
 
     respond_to do |format|
       if @team_log.save
-        format.html { redirect_to team_log_url(@team_log), notice: "Match was successfully created." }
+        format.html { redirect_to team_log_url(@team_log) }
         format.json { render :show, status: :created, location: @team_log }
         format.turbo_stream do
           render turbo_stream: turbo_stream.update(
             "toggle_new",
-            partial: "teams/team_log",
-            locals: { team_log: @team_log, team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
+            partial: "teams/team_log_form",
+            locals: { team_log: TeamLog.new(team: @team), team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
           )
         end
       else
@@ -39,8 +41,36 @@ class TeamLogsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.update(
             "toggle_new",
-            partial: "teams/team_log",
-            locals: { team_log: TeamLog.new(team: @team), team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
+            partial: "teams/team_log_form",
+            locals: { team_log: @team_log, team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
+          )
+        end
+      end
+    end
+  end
+
+  def update
+    @team_log.log = params[:team_log][:log]
+
+    respond_to do |format|
+      if @team_log.save
+        format.html { redirect_to team_log_url(@team_log) }
+        format.json { render :show, status: :created, location: @team_log }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            "#{dom_id(@team_log)}_edit",
+            partial: "teams/team_log_edit_box",
+            locals: { team_log: @team_log, team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
+          )
+        end
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @team_log.errors, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            "#{dom_id(@team_log)}_edit",
+            partial: "teams/team_log_edit_box",
+            locals: { team_log: @team_log, team: @team, markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML) }
           )
         end
       end

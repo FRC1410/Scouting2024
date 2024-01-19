@@ -1,3 +1,4 @@
+<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
 <p style="color: green"><%= notice %></p>
 
 <table id="teams" class="hover">
@@ -13,6 +14,10 @@
   <%= render @team %>
 </table>
 
+<%= turbo_frame_tag "toggle_new" do %>
+  <%= render "team_log_form", team: @team, team_log: TeamLog.new(team: @team), markdown: markdown %>
+<% end %>
+
 <table>
   <thead>
   <tr>
@@ -21,45 +26,15 @@
   </tr>
   </thead>
   <tbody id="team_logs">
-  <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
-  <% @team.team_logs.each do |team_log| %>
-    <%= render "team_log", team_log: team_log, markdown: markdown %>
-  <% end %>
   <%= turbo_stream_from "team_logs" %>
 
-  <%= turbo_stream.append :team_logs %>
+  <%= turbo_stream.prepend :team_logs %>
+
+  <% @team.team_logs.each do |team_log| %>
+    <%= render "team_log", team_log: team_log, team: @team, markdown: markdown %>
+  <% end %>
   </tbody>
 </table>
-
-<%= form_with(model: team_log = TeamLog.new(team: @team), url: team_team_logs_path(@team), data: { turbo: true }) do |form| %>
-  <% if team_log.errors.any? %>
-    <div style="color: red" class="grid-x">
-      <ul class="cell">
-        <% team_log.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="grid-x grid-padding-x small-up-1 medium-up-5 large-up-4">
-    <div class="cell">
-      <div>
-        <%= form.label :log %>
-      </div>
-      <div>
-        <%= form.text_field :log, tabindex: 0 %>
-      </div>
-    </div>
-
-
-    <div class="cell expanded">
-      <div>&nbsp;</div>
-      <div>
-        <%= form.submit(class: "button") %>
-      </div>
-    </div>
-  </div>
-<% end %>
 
 
 <div>
