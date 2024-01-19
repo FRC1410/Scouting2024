@@ -4,7 +4,10 @@ class MatchesController < ApplicationController
 
   # GET /matches or /matches.json
   def index
-    @matches = @competition.matches
+    @matches = @competition.matches.eager_load(
+      red_alliance: [team_score_sheets: :team],
+      blue_alliance: [team_score_sheets: :team]
+    )
     @match = Match.new(competition: @competition)
   end
 
@@ -31,7 +34,7 @@ class MatchesController < ApplicationController
           render turbo_stream: turbo_stream.update(
             "toggle_new",
             partial: "matches/form",
-            locals: { match: Match.new(competition: @competition), competition: @competition}
+            locals: { match: Match.new(competition: @competition), competition: @competition }
           )
         end
       else

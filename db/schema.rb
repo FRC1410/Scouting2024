@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_17_221548) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_19_070919) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "color", null: false
+    t.integer "match_id"
+    t.index ["match_id"], name: "index_alliances_on_match_id"
   end
 
   create_table "competitions", force: :cascade do |t|
@@ -29,12 +31,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_221548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "match_number"
-    t.integer "red_alliance_id"
-    t.integer "blue_alliance_id"
     t.integer "competition_id", default: 11, null: false
-    t.index ["blue_alliance_id"], name: "index_matches_on_blue_alliance_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
-    t.index ["red_alliance_id"], name: "index_matches_on_red_alliance_id"
   end
 
   create_table "team_logs", force: :cascade do |t|
@@ -76,8 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_221548) do
     t.text "logo"
   end
 
-  add_foreign_key "matches", "alliances", column: "blue_alliance_id"
-  add_foreign_key "matches", "alliances", column: "red_alliance_id"
+  add_foreign_key "alliances", "matches"
   add_foreign_key "matches", "competitions"
   add_foreign_key "team_logs", "alliances"
   add_foreign_key "team_logs", "teams"
