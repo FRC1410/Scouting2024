@@ -10,9 +10,8 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
 
   * I assume you already have `git` since you are seeing this README.
   * First you will need `rbenv`.
-  * On windows do this instead [rbenv windows](https://github.com/ccmywish/rbenv-for-windows)
   * Follow the instructions [here](https://github.com/rbenv/rbenv)
-  * The easiest way on a mac is using [homebrew](https://brew.sh/)
+    * On Windows the best path seems to be to install Ubunut and work inside tha environment. Follow the instructiosn [here](https://www.hanselman.com/blog/ruby-on-rails-on-windows-is-not-just-possible-its-fabulous-using-wsl2-and-vs-code)  * The easiest way on a mac is using [homebrew](https://brew.sh/)
   * If you have installed `brew` then run `brew install rben`
   * If you have already cloned this project locally then you will need to activate Ruby 3.0.3 by `cd`ing into the `Scouting1410` directory.
   * You can do this
@@ -41,7 +40,7 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
 # RESOURCES #
 
 * I highly recommend you use the ItelliJ based ruby IDE `RubyMine` from [JetBrains](https://www.jetbrains.com/ruby/) which you should have full access to via you educational account. However, VSCode should also be fine. RubyMine has some really nice features for working on Rails projects.
-* 
+
 * Rails is written in Ruby. Its is a fun language that prioritizes developer happiness. 
   * https://ruby-doc.org/
   * https://www.ruby-lang.org/en/documentation/quickstart/
