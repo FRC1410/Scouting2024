@@ -3,7 +3,7 @@
     <%= button_to(score_url, class: "button expanded score-button") do %>
       <h1>
         <%= t(score_field) %>:
-        <%= turbo_frame_tag dom_id(team_score_sheet, score_field) do %>
+        <%= turbo_frame_tag score_field do %>
           <%= team_score_sheet[score_field] %>
         <% end %>
     <% end %>

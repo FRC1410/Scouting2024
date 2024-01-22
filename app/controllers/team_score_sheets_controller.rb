@@ -3,11 +3,6 @@ class TeamScoreSheetsController < ApplicationController
   before_action :set_team_score_sheet, only: %i[
   show
   edit
-  score_amp
-  score_speaker
-  score_amp_auto
-  score_speaker_auto
-  score_trap
   leave
   toggle_auto
 ]
@@ -59,14 +54,26 @@ class TeamScoreSheetsController < ApplicationController
   private
 
   def score(location)
-    @team_score_sheet[location] = @team_score_sheet[location].to_i + params[:increment].to_i
+    current_score = TeamScoreSheet.where(id: params[:id]).pluck(location).first
 
-    if @team_score_sheet[location].to_i <= 0
-      @team_score_sheet[location] = 0
+    increment = params[:increment].to_i
+
+    new_score = current_score + increment
+
+    if new_score >= 0
+      TeamScoreSheet.where(id: params[:id]).update_all("#{location} = #{new_score}")
+    else
+      new_score = current_score
     end
 
-    @team_score_sheet.save
-    render_turbo(location)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          location,
+          body: new_score,
+        )
+      end
+    end
   end
 
   def render_turbo(location)
