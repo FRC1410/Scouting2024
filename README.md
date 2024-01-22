@@ -12,6 +12,7 @@ This is a Rails 7 App. These instructions are Mac specific. It would be great fo
   * First you will need `rbenv`.
   * Follow the instructions [here](https://github.com/rbenv/rbenv)
     * On Windows the best path seems to be to install Ubunut and work inside tha environment. Follow the instructiosn [here](https://www.hanselman.com/blog/ruby-on-rails-on-windows-is-not-just-possible-its-fabulous-using-wsl2-and-vs-code)  * The easiest way on a mac is using [homebrew](https://brew.sh/)
+    * Make sure to always run Powershell as Administrator
   * If you have installed `brew` then run `brew install rben`
   * If you have already cloned this project locally then you will need to activate Ruby 3.0.3 by `cd`ing into the `Scouting1410` directory.
   * You can do this
