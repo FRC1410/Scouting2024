@@ -21,3 +21,30 @@
            score_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
+
+<div class="cell small-5"></div>
+<div class="cell small-6">
+  SCORE PARK
+  <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "PARK",
+            @team_score_sheet.park?,
+            @team_score_sheet.park?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "park",
+            id: "park"
+          )
+      %>
+      <label class="switch-paddle" for="park">
+        <span class="show-for-sr">LEAVE</span>
+        <span class="switch-active" aria-hidden="true">Yes</span>
+        <span class="switch-inactive" aria-hidden="true">No</span>
+      </label>
+    </div>
+  <% end %>
+</div>
+<div class="cell expanded">
+
+</div>

@@ -4,6 +4,7 @@ class TeamScoreSheetsController < ApplicationController
   show
   edit
   leave
+  park
   toggle_auto
 ]
 
@@ -23,6 +24,12 @@ class TeamScoreSheetsController < ApplicationController
 
   def score_speaker
     score(:score_speaker)
+  end
+
+  def park
+    @team_score_sheet.park = !@team_score_sheet.park?
+    @team_score_sheet.save
+    render_turbo(:park)
   end
 
   def score_trap
