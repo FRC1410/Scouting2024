@@ -41,7 +41,7 @@ Copy the code for `leave`. That code looks like
 
 Paste that code into the file `app/views/team_score_sheets/_teleop_section.html.erb:23` at the end.
 
-In your copied code, everywhere you see `leave` replace it with `park`.
+In your copied code, everywhere you see `leave` replace it with `park` or `LEAVE` with `PARK`.
 
 You can now look at the app in the browser, navigate to a
 team score sheet by clicking on a team number in the matches list, and after you click `End Auto`
@@ -118,7 +118,7 @@ before_action :set_team_score_sheet, only: %i[
 ]
 ```
 
-Now if you go back to the browser and hit the `SCORE ONSTAGE` toggle you should see the toggle update with no error!
+Now if you go back to the browser and hit the `SCORE PARK` toggle you should see the toggle update with no error!
 Refresh the page to make sure the value sticks.
 
 You are done! Woo!
@@ -136,7 +136,7 @@ Run
 
 ```
 git add .
-git commit -m 'Adds Score Onstage to the team score sheet'
+git commit -m 'Adds Score Park to the team score sheet'
 git pull --rebase
 ```
 
