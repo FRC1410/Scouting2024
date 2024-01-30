@@ -39,6 +39,9 @@ class TeamScoreSheetsController < ApplicationController
   def score_amp
     score(:score_amp)
   end
+  def score_speaker_amplified
+    score(:score_speaker_amplified)
+  end
 
   def leave
     @team_score_sheet.leave = !@team_score_sheet.leave?

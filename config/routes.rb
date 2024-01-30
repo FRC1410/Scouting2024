@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         post :score_speaker, on: :member
         post :score_amp_auto, on: :member
         post :score_speaker_auto, on: :member
+        post :score_speaker_amplified, on: :member
         post :score_trap, on: :member
         post :park, on: :member
         post :leave, on: :member

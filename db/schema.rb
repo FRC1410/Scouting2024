@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_19_070919) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_24_020940) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_070919) do
     t.boolean "onstage", default: false
     t.boolean "onstage_hinote", default: false
     t.boolean "harmony", default: false
+    t.integer "score_speaker_amplified", default: 0
     t.index ["alliance_id"], name: "index_team_score_sheets_on_alliance_id"
     t.index ["team_id"], name: "index_team_score_sheets_on_team_id"
   end

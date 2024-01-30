@@ -55,6 +55,7 @@ Match.create!(
       score_speaker: Random.rand(30),
       score_amp: Random.rand(30),
       score_trap: Random.rand(30),
+      score_speaker_amplified: Random.rand(30),
       park: bools.sample,
       onstage: bools.sample,
       onstage_hinote: bools.sample,
