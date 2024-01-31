@@ -1,4 +1,4 @@
-Hello.new.greet
+# Hello.new.greet
 
 class Hello
 
@@ -6,13 +6,14 @@ class Hello
     puts "Making a new hello"
     puts "Here is the new instance"
     puts self
+    puts "From windows"
 
     puts "It is an instance of class"
     puts self.class
 
-
     @count = 0
   end
+
   def greet
     say("Hello")
     say "Hello"
