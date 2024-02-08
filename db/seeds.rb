@@ -11,7 +11,7 @@ Team.destroy_all
 CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true).each do |record|
   values = record.to_h.symbolize_keys
   values.delete(:blank)
-  if values[:location].match?('USA') and !values[:name].match?('Off-Season Demo Team')
+  if !values[:name].match?('Off-Season Demo Team')
     Team.find_or_create_by(values)
   end
 end
