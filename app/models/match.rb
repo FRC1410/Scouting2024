@@ -13,6 +13,7 @@ class Match < ApplicationRecord
   has_one :blue_alliance, -> { where(color: :blue) }, class_name: "Alliance", dependent: :destroy, autosave: true
 
   validates_presence_of :match_number
+  validates_uniqueness_of :match_number, scope: :competition_id
 
   def red_alliance_teams
     teams = red_alliance.try(&:teams) || []
