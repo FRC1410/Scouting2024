@@ -7,7 +7,7 @@ class MatchesController < ApplicationController
     @matches = @competition.matches.eager_load(
       red_alliance: [team_score_sheets: :team],
       blue_alliance: [team_score_sheets: :team]
-    )
+    ).order(:match_number)
     @match = Match.new(competition: @competition)
   end
 
