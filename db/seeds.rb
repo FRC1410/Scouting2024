@@ -16,19 +16,6 @@ CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true)
   end
 end
 
-Match.create!(
-  competition: utah,
-  match_number: 1,
-  red_alliance: Alliance.new(
-    color: :red,
-    teams: Team.where(number: [1, 1410, 1619]).all
-  ),
-  blue_alliance: Alliance.new(
-    color: :blue,
-    teams: Team.where(number: [1339, 2240, 2945]).all
-  )
-)
-
 200.times do |match_number|
   alliance_red = Alliance.create!(
     color: :red,
@@ -40,7 +27,7 @@ Match.create!(
   )
   Match.create!(
     competition: utah,
-    match_number: match_number,
+    match_number: match_number+1,
     red_alliance: alliance_red,
     blue_alliance: alliance_blue
   )
