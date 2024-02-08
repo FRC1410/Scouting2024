@@ -4,7 +4,7 @@
   </td>
   <td>
     <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
-      <%= link_to "Scout #{team_score_sheet.team.number}", edit_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet), class: "button" %>
+      <%= link_to "Scout #{team_score_sheet.team.number}", edit_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet), class: "button alert" %>
     <% end %>
   </td>
   <td>
