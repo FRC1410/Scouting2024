@@ -1,6 +1,5 @@
-<div class="cell small-5"></div>
+<div class="cell small-4 text-center"><h1>LEFT START?</h1></div>
 <div class="cell small-6">
-  SCORE LEAVE
   <%= form_with(url: leave_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
       <%= check_box_tag(
@@ -15,8 +14,8 @@
       %>
       <label class="switch-paddle" for="leave">
         <span class="show-for-sr">LEAVE</span>
-        <span class="switch-active" aria-hidden="true">Yes</span>
-        <span class="switch-inactive" aria-hidden="true">No</span>
+        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
+        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
       </label>
     </div>
   <% end %>
@@ -38,5 +37,7 @@
 %>
 
 <div class="cell expanded">
-  <%= button_to("END AUTO", toggle_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded") %>
+  <%= button_to(toggle_auto_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded score-button") do %>
+    <h1>END AUTO</h1>
+  <% end %>
 </div>

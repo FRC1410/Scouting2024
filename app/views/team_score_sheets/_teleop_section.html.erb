@@ -1,5 +1,7 @@
 <div class="cell expanded">
-  <%= button_to("ENABLE AUTO", toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") %>
+  <%= button_to(toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") do %>
+    <h1>ENABLE AUTO</h1>
+  <% end %>
 </div>
 <%= render 'score_buttons',
            score_field: :score_speaker,
@@ -28,9 +30,8 @@
            undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
-<div class="cell small-5"></div>
+<div class="cell small-5"><h1>PARKED?</h1></div>
 <div class="cell small-6">
-  SCORE PARK
   <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
       <%= check_box_tag(
@@ -44,9 +45,9 @@
           )
       %>
       <label class="switch-paddle" for="park">
-        <span class="show-for-sr">LEAVE</span>
-        <span class="switch-active" aria-hidden="true">Yes</span>
-        <span class="switch-inactive" aria-hidden="true">No</span>
+        <span class="show-for-sr">PARK</span>
+        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
+        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
       </label>
     </div>
   <% end %>
