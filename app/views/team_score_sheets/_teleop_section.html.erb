@@ -9,12 +9,6 @@
            score_url: score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: score_speaker_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
-<%= render 'score_buttons',
-           score_field: :score_speaker_amplified,
-           team_score_sheet: @team_score_sheet,
-           score_url: score_speaker_amplified_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
-           undo_url: score_speaker_amplified_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
-%>
 
 <%= render 'score_buttons',
            score_field: :score_amp,
