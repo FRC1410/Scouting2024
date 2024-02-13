@@ -45,8 +45,10 @@ end
       score_speaker_amplified: Random.rand(30),
       park: bools.sample,
       onstage: bools.sample,
-      onstage_hinote: bools.sample,
       harmony: bools.sample,
+      defended: bools.sample,
+      dead_on_field: bools.sample,
+      foul: Random.rand(3),
     )
   end
 end
