@@ -8,6 +8,15 @@ utah = Competition.create(name: 'Utah')
 Competition.create(name: 'Houston')
 TeamLog.destroy_all
 Team.destroy_all
+User.destroy_all
+
+User.create!(
+  first_name: 'The',
+  last_name: 'Kraken',
+  initials: 'TJ',
+  email: 'tj@example.com',
+)
+
 CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true).each do |record|
   values = record.to_h.symbolize_keys
   values.delete(:blank)

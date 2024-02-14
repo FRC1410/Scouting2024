@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_13_003459) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_13_235018) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -75,6 +75,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_003459) do
     t.text "team_type"
     t.text "location"
     t.text "logo"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "initials"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "alliances", "matches"

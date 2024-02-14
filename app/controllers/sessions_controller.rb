@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :set_auth
+  skip_before_action :set_auth, :check_user
   def create
     auth = request.env['omniauth.auth']
     session[:user_token] = auth.credentials.token

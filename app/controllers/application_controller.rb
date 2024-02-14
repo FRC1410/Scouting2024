@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   prepend_before_action :set_auth
+  before_action :check_user
 
   before_action :get_comps
 
@@ -10,7 +11,18 @@ class ApplicationController < ActionController::Base
       session[:return_to] = request.original_fullpath
       render 'layouts/login', layout: 'layouts/login'
     end
-    @user_name = session[:user_email] || "A Random Kraken"
+
+    @user = if ENV['AUTH_ENABLED'] == 'false'
+              User.first
+            else
+              User.find_by(email: session[:user_email])
+            end
+  end
+
+  def check_user
+    unless @user.present?
+      redirect_to '/users/new'
+    end
   end
 
   def get_comps

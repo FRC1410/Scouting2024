@@ -30,7 +30,7 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li class="menu-text">
-        <%= session[:user_email] || "Rando Krako" %>
+        <%= @user.name %>
       </li>
       <li>
         <%= link_to 'Logout', '/logout' %>
