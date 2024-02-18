@@ -62,6 +62,10 @@ end
   end
 end
 
+score_sheet = TeamScoreSheet.first
+score_sheet.user = User.first
+score_sheet.save!
+
 TeamLog.create!(
   log: <<~LOG,
         # Amantem lacerare Peloro succinctae
