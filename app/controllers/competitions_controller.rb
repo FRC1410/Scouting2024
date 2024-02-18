@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_action :set_competition, only: %i[ show edit update destroy ]
+  before_action :set_competition, only: %i[ show edit update destroy upload_matches]
 
   # GET /competitions or /competitions.json
   def index
@@ -56,6 +56,12 @@ class CompetitionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def upload_matches
+    if !@competition.create_matches_from_file(params[:match][:match_file])
+      redirect_to competitions_url, alert: "Match number already exists"
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

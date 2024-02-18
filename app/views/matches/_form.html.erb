@@ -1,3 +1,9 @@
+<%= form_with(model: match, url: upload_matches_competition_path(match.competition, match), data: { turbo: false }) do |form| %>
+  <div class="grid-x grid-padding-x small-up-1 medium-up-5 large-up-4">
+    <%= form.file_field(:match_file) %>
+    <%= form.submit %>
+  </div>
+<% end %>
 <%= form_with(model: match, url: competition_matches_path(match.competition), data: { turbo: true }) do |form| %>
   <% if match.errors.any? %>
     <div style="color: red" class="grid-x">
