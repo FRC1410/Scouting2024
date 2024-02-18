@@ -1,6 +1,6 @@
 <div class="cell expanded">
   <%= button_to(toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") do %>
-    <h1>ENABLE AUTO</h1>
+    <h1>RETURN TO AUTO</h1>
   <% end %>
 </div>
 <%= render 'score_buttons',
@@ -47,5 +47,7 @@
   <% end %>
 </div>
 <div class="cell expanded">
-
+  <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :final), class: "button expanded score-button") do %>
+    <h1>TELEOP COMPLETE</h1>
+  <% end %>
 </div>

@@ -6,6 +6,8 @@ class TeamScoreSheetsController < ApplicationController
   leave
   park
   toggle_auto
+  toggle_teleop
+  scouting_complete
 ]
 
   def show
@@ -57,6 +59,28 @@ class TeamScoreSheetsController < ApplicationController
         )
       end
     end
+  end
+
+  def toggle_teleop
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          "toggle_auto",
+          partial: "team_score_sheets/#{params[:show_section]}_section",
+          locals: {
+            match: @match,
+            team_score_sheet: @team_score_sheet,
+            team: @team_score_sheet.team,
+            team_log: TeamLog.new(team: @team_score_sheet.team),
+            markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML),
+          }
+        )
+      end
+    end
+  end
+
+  def scouting_complete
+    redirect_to competition_matches_path(@match.competition)
   end
 
   private

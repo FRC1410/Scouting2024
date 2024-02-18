@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         post :park, on: :member
         post :leave, on: :member
         post :toggle_auto, on: :member
+        post :toggle_teleop, on: :member
+        post :scouting_complete, on: :member
       end
     end
   end
