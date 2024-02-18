@@ -4,12 +4,40 @@
   </td>
   <td>
     <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
-      <%= link_to "Scout #{team_score_sheet.team.number}", edit_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet), class: "button alert" %>
+      <%=
+
+        url = if team_score_sheet.locked?(@user)
+                "#"
+              else
+                edit_competition_match_team_score_sheet_path(
+                  match.competition,
+                  match,
+                  team_score_sheet)
+              end
+
+        link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
+                url,
+                disabled: team_score_sheet.locked?(@user),
+                class: "button alert"
+      %>
     <% end %>
   </td>
   <td>
     <% match.blue_alliance.team_score_sheets.each do |team_score_sheet| %>
-      <%= link_to "Scout #{team_score_sheet.team.number}", edit_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet), class: "button" %>
+      <%= url = if team_score_sheet.locked?(@user)
+                  "#"
+                else
+                  edit_competition_match_team_score_sheet_path(
+                    match.competition,
+                    match,
+                    team_score_sheet)
+                end
+
+          link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
+                  url,
+                  disabled: team_score_sheet.locked?(@user),
+                  class: "button"
+      %>
     <% end %>
   </td>
 </tr>

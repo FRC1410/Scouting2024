@@ -12,6 +12,7 @@ class TeamScoreSheetsController < ApplicationController
   end
 
   def edit
+    @team_score_sheet.update!(user: @user)
   end
 
   def score_amp_auto
