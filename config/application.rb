@@ -23,5 +23,6 @@ module Scouting1410
     #
     config.time_zone = "Mountain Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_paths += %W(#{config.root}/app/errors)
   end
 end
