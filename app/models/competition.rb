@@ -1,10 +1,11 @@
 require 'csv'
 class Competition < ApplicationRecord
   has_many :matches, dependent: :destroy, autosave: true
+
   def create_matches_from_file(file)
     CSV.open(file, 'r', headers: true).each do |record|
       values = record.to_h.symbolize_keys
-      p values.values_at(:Red1, :Red2, :Red3)
+      values.values_at(:Red1, :Red2, :Red3)
       teams = Team.where(number: values.values_at(:Red1, :Red2, :Red3)).all
       alliance_red = Alliance.create!(
         color: :red,
@@ -25,8 +26,7 @@ class Competition < ApplicationRecord
         return false
       end
     end
+
     true
   end
-
-
 end
