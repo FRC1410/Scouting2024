@@ -18,7 +18,7 @@
         link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
                 url,
                 disabled: team_score_sheet.locked?(@user),
-                class: "button alert"
+                class: "button alert " + (team_score_sheet.scouting_complete? ? "scouting-complete" : "")
       %>
     <% end %>
   </td>
@@ -36,7 +36,7 @@
           link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
                   url,
                   disabled: team_score_sheet.locked?(@user),
-                  class: "button"
+                  class: "button " + (team_score_sheet.scouting_complete? ? "scouting-complete" : "")
       %>
     <% end %>
   </td>

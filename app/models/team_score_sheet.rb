@@ -11,6 +11,6 @@ class TeamScoreSheet < ApplicationRecord
   end
 
   def locked?(user)
-    self.user.present? && self.user != user
+    self.currently_locked? && self.user != user
   end
 end

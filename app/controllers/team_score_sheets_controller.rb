@@ -15,6 +15,7 @@ class TeamScoreSheetsController < ApplicationController
 
   def edit
     @team_score_sheet.update!(user: @user)
+    @team_score_sheet.update!(currently_locked: true)
   end
 
   def score_amp_auto
@@ -80,6 +81,8 @@ class TeamScoreSheetsController < ApplicationController
   end
 
   def scouting_complete
+    @team_score_sheet.update!(currently_locked: false)
+    @team_score_sheet.update!(scouting_complete: true)
     redirect_to competition_matches_path(@match.competition)
   end
 

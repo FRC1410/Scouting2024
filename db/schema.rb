@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_010820) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_004445) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -41,8 +41,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_010820) do
     t.integer "alliance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_score_sheet_id"
     t.index ["alliance_id"], name: "index_team_logs_on_alliance_id"
     t.index ["team_id"], name: "index_team_logs_on_team_id"
+    t.index ["team_score_sheet_id"], name: "index_team_logs_on_team_score_sheet_id"
   end
 
   create_table "team_score_sheets", force: :cascade do |t|
@@ -64,6 +66,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_010820) do
     t.boolean "defended", default: false
     t.boolean "dead_on_field", default: false
     t.integer "user_id"
+    t.boolean "currently_locked", default: false
+    t.boolean "scouting_complete", default: false
     t.index ["alliance_id"], name: "index_team_score_sheets_on_alliance_id"
     t.index ["team_id"], name: "index_team_score_sheets_on_team_id"
     t.index ["user_id"], name: "index_team_score_sheets_on_user_id"
