@@ -17,7 +17,10 @@ window.checkConnection = function () {
                 $('body').prepend("<div class='offline'>YOU ARE OFFLINE</div>")
             }
         }
-    )
+    ).then(() => {
+        $('body').removeClass('offline')
+        $('div.offline').remove()
+    })
     setTimeout(window.checkConnection, 1000);
 }
 
