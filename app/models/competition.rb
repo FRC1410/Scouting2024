@@ -1,6 +1,8 @@
 require 'csv'
 class Competition < ApplicationRecord
   has_many :matches, dependent: :destroy, autosave: true
+  has_many :competition_teams, dependent: :destroy, autosave: true
+  has_many :teams, through: :competition_teams
 
   def create_matches_from_file(file)
     CSV.open(file, 'r', headers: true).each do |record|

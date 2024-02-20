@@ -41,6 +41,9 @@ end
     blue_alliance: alliance_blue
   )
 
+  teams = TeamScoreSheet.pluck(:team_id)
+  utah.update!(teams: Team.where(id: teams))
+
   bools = [true, false]
 
   (alliance_red.team_score_sheets + alliance_blue.team_score_sheets).each do |team_score_sheet|

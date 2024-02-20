@@ -8,6 +8,12 @@
   </td>
 
   <td>
+    <%=
+      link_to competition.teams.count, competition_competition_teams_path(competition)
+    %>
+  </td>
+
+  <td>
     <%= link_to "Matches", competition_matches_path(competition), class: "button" %>
   </td>
   <td>
