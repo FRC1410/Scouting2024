@@ -46,6 +46,31 @@
     </div>
   <% end %>
 </div>
+
+<div class="cell small-5"><h1>DEFENDED?</h1></div>
+<div class="cell small-6">
+  <%= form_with(url: defended_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "defended",
+            @team_score_sheet.defended?,
+            @team_score_sheet.defended?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "defended",
+            id: "defended"
+          )
+      %>
+      <label class="switch-paddle" for="defended">
+        <span class="show-for-sr">defended</span>
+        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
+        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+      </label>
+    </div>
+  <% end %>
+</div>
+
+<div class="cell expanded"></div>
 <div class="cell expanded">
   <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :final), class: "button expanded score-button") do %>
     <h1>TELEOP COMPLETE</h1>

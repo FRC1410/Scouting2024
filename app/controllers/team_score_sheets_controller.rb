@@ -5,6 +5,7 @@ class TeamScoreSheetsController < ApplicationController
   edit
   leave
   park
+  defended
   toggle_auto
   toggle_teleop
   scouting_complete
@@ -48,6 +49,12 @@ class TeamScoreSheetsController < ApplicationController
     @team_score_sheet.leave = !@team_score_sheet.leave?
     @team_score_sheet.save
     render_turbo(:leave)
+  end
+
+  def defended
+    @team_score_sheet.defended = !@team_score_sheet.defended?
+    @team_score_sheet.save
+    render_turbo(:defended)
   end
 
   def toggle_auto
