@@ -36,7 +36,7 @@ end
   )
   Match.create!(
     competition: utah,
-    match_number: match_number+1,
+    match_number: match_number + 1,
     red_alliance: alliance_red,
     blue_alliance: alliance_blue
   )
