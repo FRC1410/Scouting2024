@@ -6,6 +6,7 @@ class TeamScoreSheetsController < ApplicationController
   leave
   park
   defended
+  dead_on_field
   toggle_auto
   toggle_teleop
   scouting_complete
@@ -57,6 +58,11 @@ class TeamScoreSheetsController < ApplicationController
     render_turbo(:defended)
   end
 
+  def dead_on_field
+    @team_score_sheet.dead_on_field = !@team_score_sheet.dead_on_field
+    @team_score_sheet.save
+    render_turbo(:dead_on_field)
+  end
   def toggle_auto
     respond_to do |format|
       format.turbo_stream do

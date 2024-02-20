@@ -71,6 +71,32 @@
 </div>
 
 <div class="cell expanded"></div>
+
+<div class="cell small-5"><h3>DEAD ON FIELD FOR MORE THAN 15 SECONDS</h3></div>
+<div class="cell small-6">
+  <%= form_with(url: dead_on_field_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "dead_on_field",
+            @team_score_sheet.dead_on_field?,
+            @team_score_sheet.dead_on_field?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "dead_on_field",
+            id: "dead_on_field"
+          )
+      %>
+      <label class="switch-paddle" for="dead_on_field">
+        <span class="show-for-sr">dead_on_field</span>
+        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
+        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+      </label>
+    </div>
+  <% end %>
+</div>
+
+<div class="cell expanded"></div>
+
 <div class="cell expanded">
   <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :final), class: "button expanded score-button") do %>
     <h1>TELEOP COMPLETE</h1>
