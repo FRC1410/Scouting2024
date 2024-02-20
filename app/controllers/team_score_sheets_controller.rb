@@ -63,6 +63,10 @@ class TeamScoreSheetsController < ApplicationController
     @team_score_sheet.save
     render_turbo(:dead_on_field)
   end
+
+  def foul
+    score(:foul)
+  end
   def toggle_auto
     respond_to do |format|
       format.turbo_stream do
