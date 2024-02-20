@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
 
   def set_auth
     unless session[:user_token].present? || ENV['AUTH_ENABLED'] == 'false'
-      session[:return_to] = request.original_fullpath
+      unless request.format.json?
+        session[:return_to] = request.original_fullpath
+      end
       render 'layouts/login', layout: 'layouts/login'
     end
 

@@ -10,7 +10,7 @@ Rails.start()
 window.jQuery = jquery
 window.$ = jquery
 window.checkConnection = function () {
-    $.ajax('/healthcheck',
+    $.ajax('/healthcheck.json',
         {
             error: function () {
                 $('body').addClass('offline')
