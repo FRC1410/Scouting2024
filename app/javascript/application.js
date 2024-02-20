@@ -9,8 +9,20 @@ Rails.start()
 
 window.jQuery = jquery
 window.$ = jquery
+window.checkConnection = function () {
+    $.ajax('/healthcheck',
+        {
+            error: function () {
+                $('body').addClass('offline')
+                $('body').prepend("<div class='offline'>YOU ARE OFFLINE</div>")
+            }
+        }
+    )
+    setTimeout(window.checkConnection, 1000);
+}
 
 $(function () {
     $(document).foundation();
     Turbo.session.drive = false
+    setTimeout(window.checkConnection, 1000);
 })
