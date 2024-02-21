@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         post :park, on: :member
         post :leave, on: :member
         post :defended, on: :member
+        post :onstage, on: :member
         post :dead_on_field, on: :member
         post :foul, on: :member
         post :toggle_auto, on: :member

@@ -47,6 +47,30 @@
   <% end %>
 </div>
 
+<div class="cell small-5"><h1>On Stage?</h1></div>
+<div class="cell small-6">
+  <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "onstage",
+            @team_score_sheet.onstage?,
+            @team_score_sheet.onstage?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "onstage",
+            id: "onstage"
+          )
+      %>
+      <label class="switch-paddle" for="onstage">
+        <span class="show-for-sr">onstage</span>
+        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
+        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+      </label>
+    </div>
+  <% end %>
+</div>
+
+
 <div class="cell small-5"><h1>DEFENDED?</h1></div>
 <div class="cell small-6">
   <%= form_with(url: defended_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>

@@ -5,6 +5,7 @@ class TeamScoreSheetsController < ApplicationController
   edit
   leave
   park
+  onstage
   defended
   dead_on_field
   toggle_auto
@@ -46,6 +47,11 @@ class TeamScoreSheetsController < ApplicationController
     score(:score_amp)
   end
 
+  def onstage
+    @team_score_sheet.onstage = !@team_score_sheet.onstage?
+    @team_score_sheet.save
+    render_turbo(:onstage)
+  end
   def leave
     @team_score_sheet.leave = !@team_score_sheet.leave?
     @team_score_sheet.save
