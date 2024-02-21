@@ -25,14 +25,16 @@ CSV.open(Rails.root.join('db', 'fixtures', 'frc_teams.csv'), 'r', headers: true)
   end
 end
 
+sample_teams = Team.order("RANDOM()").limit(20)
+
 200.times do |match_number|
   alliance_red = Alliance.create!(
     color: :red,
-    teams: Team.order("RANDOM()").limit(3)
+    teams: [sample_teams.sample, sample_teams.sample, sample_teams.sample]
   )
   alliance_blue = Alliance.create!(
     color: :blue,
-    teams: Team.order("RANDOM()").limit(3)
+    teams: [sample_teams.sample, sample_teams.sample, sample_teams.sample]
   )
   Match.create!(
     competition: utah,
@@ -40,9 +42,6 @@ end
     red_alliance: alliance_red,
     blue_alliance: alliance_blue
   )
-
-  teams = TeamScoreSheet.pluck(:team_id)
-  utah.update!(teams: Team.where(id: teams))
 
   bools = [true, false]
 
@@ -64,6 +63,9 @@ end
     )
   end
 end
+
+teams = TeamScoreSheet.pluck(:team_id)
+utah.update!(teams: Team.where(id: teams))
 
 score_sheet = TeamScoreSheet.first
 score_sheet.user = User.first
