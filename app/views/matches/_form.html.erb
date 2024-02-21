@@ -33,7 +33,7 @@
       </div>
       <div>
         <%= form.collection_select :red_alliance_teams,
-                                   Team.select(:id, :number, :name).all,
+                                   competition.teams.select(:id, :number, :name).order(:number),
                                    :id,
                                    :number_and_name,
                                    multiple: true
@@ -46,7 +46,7 @@
       </div>
       <div>
         <%= form.collection_select :blue_alliance_teams,
-                                   Team.select(:id, :number, :name).all,
+                                   competition.teams.select(:id, :number, :name).order(:number),
                                    :id,
                                    :number_and_name,
                                    multiple: true

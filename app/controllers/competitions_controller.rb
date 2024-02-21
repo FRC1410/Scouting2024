@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_action :set_competition, only: %i[ show edit update destroy upload_matches]
+  before_action :set_competition, only: %i[ show edit update destroy upload_matches upload_teams]
 
   # GET /competitions or /competitions.json
   def index
@@ -56,9 +56,16 @@ class CompetitionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def upload_matches
     if !@competition.create_matches_from_file(params[:match][:match_file])
       redirect_to competitions_url, alert: "Match number already exists"
+    end
+  end
+
+  def upload_teams
+    if !@competition.create_teams_from_file(params[:competition][:teams_file])
+      redirect_to competitions_url, alert: "Error creating teams"
     end
   end
 

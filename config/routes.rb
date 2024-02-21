@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :competitions do
     post :upload_matches, on: :member
+    patch :upload_teams, on: :member
     resources :competition_teams
     resources :matches, except: [:new] do
       resources :team_score_sheets do

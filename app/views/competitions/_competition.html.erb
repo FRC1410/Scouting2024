@@ -9,8 +9,16 @@
 
   <td>
     <%=
-      link_to competition.teams.count, competition_competition_teams_path(competition)
-    %>
+      if competition.teams.count > 0
+        link_to competition.teams.count, competition_competition_teams_path(competition)
+      else
+        form_with(model: competition, url: upload_teams_competition_path(competition), data: { turbo: false }) do |form| %>
+        <div class="grid-x grid-padding-x small-up-1 medium-up-5 large-up-4">
+          <%= form.file_field(:teams_file) %>
+          <%= form.submit %>
+        </div>
+      <% end %>
+    <% end %>
   </td>
 
   <td>

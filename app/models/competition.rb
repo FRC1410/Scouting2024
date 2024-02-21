@@ -31,4 +31,12 @@ class Competition < ApplicationRecord
 
     true
   end
+
+  def create_teams_from_file(file)
+    team_numbers = []
+    CSV.foreach(file, 'r', headers: true) {|row| team_numbers << row[0]}
+
+    teams = Team.where(number: team_numbers)
+    self.update(teams: teams)
+  end
 end
