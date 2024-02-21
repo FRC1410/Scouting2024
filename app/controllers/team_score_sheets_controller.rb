@@ -126,6 +126,11 @@ class TeamScoreSheetsController < ApplicationController
   def scouting_complete
     @team_score_sheet.update!(currently_locked: false)
     @team_score_sheet.update!(scouting_complete: true)
+
+    if @match.red_alliance.team_score_sheets.pluck(:scouting_complete).all? && @match.blue_alliance.team_score_sheets.pluck(:scouting_complete).all?
+      @match.update(completed: true)
+    end
+
     redirect_to competition_matches_path(@match.competition)
   end
 

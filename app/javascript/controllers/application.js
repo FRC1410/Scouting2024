@@ -6,6 +6,7 @@ import LogEditController from "controllers/log_edit_controller";
 import FormResetController from "controllers/form_reset_controller";
 import FoundationController from "controllers/foundation_controller";
 import SearchesController from "controllers/searches_controller";
+import MatchesController from "controllers/matches_controller";
 
 const application = Application.start()
 // Configure Stimulus development experience
@@ -20,4 +21,5 @@ application.register("log_edit", LogEditController);
 application.register("form_reset", FormResetController);
 application.register("foundation", FoundationController);
 application.register("searches", SearchesController);
+application.register("matches", MatchesController);
 application.ApplicationState = {selected: []}

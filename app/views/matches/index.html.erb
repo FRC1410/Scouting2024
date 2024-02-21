@@ -6,6 +6,12 @@
   <%= render "form", match: @match, competition: @match.competition %>
 <% end %>
 
+<div>
+  Completed Matches: <%= @competition.matches.where(completed: true).count %>
+  <a href="javascript:void(0)" id="show-complete" data-controller="matches" data-action="click->matches#showAll">Show</a>
+  <a href="javascript:void(0)" class="hide" id="hide-complete" data-controller="matches" data-action="click->matches#hideComplete">Hide</a>
+</div>
+
 <table class="hover">
   <thead>
   <tr>
