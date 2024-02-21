@@ -1,3 +1,9 @@
+<div class="cell expanded">
+  <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded navigate") do %>
+    <h4>RETURN TO TELEOP</h4>
+  <% end %>
+</div>
+
 <%= form_with(model: team_log, url: [team, team_log], data: { turbo: true }) do |form| %>
   <div class="grid-x grid-padding-x" data-controller="log_edit" data-action="<%= team_log.persisted? ? 'click->log_edit#edit' : '' %>" >
     <div  class="cell small-8 medium-12" data="click-toggle">
@@ -30,15 +36,9 @@
 <% end %>
 
 <div class="cell expanded">
-  <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop), class: "button expanded score-button") do %>
-    <h1>RETURN TO TELEOP</h1>
-  <% end %>
-</div>
-
-<div class="cell expanded">
   <%= button_to(
         scouting_complete_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop),
-        class: "button expanded score-button", "data-turbo": false) do %>
-    <h1>SCOUTING COMPLETE</h1>
+        class: "button expanded complete", "data-turbo": false) do %>
+    <h4>SCOUTING COMPLETE</h4>
   <% end %>
 </div>

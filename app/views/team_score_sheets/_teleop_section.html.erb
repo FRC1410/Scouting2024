@@ -1,6 +1,6 @@
 <div class="cell expanded">
-  <%= button_to(toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded") do %>
-    <h1>RETURN TO AUTO</h1>
+  <%= button_to(toggle_auto_competition_match_team_score_sheet_path(@match.competition.id, @match.id, @team_score_sheet.id, show_section: :auto), class: "button expanded navigate") do %>
+    <h4>RETURN TO AUTO</h4>
   <% end %>
 </div>
 <%= render 'score_buttons',
@@ -24,10 +24,15 @@
            undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
-<div class="cell small-5"><h1>PARKED</h1></div>
 <div class="cell small-6">
-  <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
-    <div class="switch large">
+      <h2>PARKED</h2>
+</div>
+<div class="cell small-6 expanded">
+      <h2>ON STAGE</h2>
+</div>
+  <div class="cell small-6">
+    <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+      <div class="switch large">
       <%= check_box_tag(
             "PARK",
             @team_score_sheet.park?,
@@ -38,18 +43,16 @@
             id: "park"
           )
       %>
-      <label class="switch-paddle" for="park">
+        <label class="switch-paddle" for="park">
         <span class="show-for-sr">PARK</span>
-        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
-        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
       </label>
     </div>
-  <% end %>
-</div>
-
-<div class="cell small-5"><h1>ON STAGE</h1></div>
-<div class="cell small-6">
-  <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <% end %>
+  </div>
+  <div class="cell small-6">
+    <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
       <%= check_box_tag(
             "onstage",
@@ -63,12 +66,14 @@
       %>
       <label class="switch-paddle" for="onstage">
         <span class="show-for-sr">onstage</span>
-        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
-        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
       </label>
     </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
+
 
 <%= render 'score_buttons',
            score_field: :score_harmony,
@@ -77,7 +82,9 @@
            undo_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
-<div class="cell small-5"><h1>DEFENDED AGAINST</h1></div>
+<div class="cell small-6 "><h2>DEFENDED AGAINST</h2></div>
+<div class="cell small-6 expanded"><h2>DEAD FOR 15 SECONDS</h2></div>
+
 <div class="cell small-6">
   <%= form_with(url: defended_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -93,16 +100,13 @@
       %>
       <label class="switch-paddle" for="defended">
         <span class="show-for-sr">defended</span>
-        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
-        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
       </label>
     </div>
   <% end %>
 </div>
 
-<div class="cell expanded"></div>
-
-<div class="cell small-5"><h3>DEAD ON FIELD FOR MORE THAN 15 SECONDS</h3></div>
 <div class="cell small-6">
   <%= form_with(url: dead_on_field_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -118,15 +122,15 @@
       %>
       <label class="switch-paddle" for="dead_on_field">
         <span class="show-for-sr">dead_on_field</span>
-        <span class="switch-active" aria-hidden="true"><h1>Yes</h1></span>
-        <span class="switch-inactive" aria-hidden="true"><h1>No</h1></span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
       </label>
     </div>
   <% end %>
 </div>
 
 <%= render 'score_buttons',
-           score_field: :FOULS,
+           score_field: :foul,
            team_score_sheet: @team_score_sheet,
            score_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
@@ -134,7 +138,7 @@
 <div class="cell expanded"></div>
 
 <div class="cell expanded">
-  <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :final), class: "button expanded score-button") do %>
-    <h1>TELEOP COMPLETE</h1>
+  <%= button_to(toggle_teleop_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :final), class: "button expanded navigate") do %>
+    <h4>TELEOP COMPLETE</h4>
   <% end %>
 </div>

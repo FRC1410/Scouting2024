@@ -27,5 +27,7 @@ window.checkConnection = function () {
 $(function () {
     $(document).foundation();
     Turbo.session.drive = false
-    setTimeout(window.checkConnection, 1000);
+    if (window.doHealthcheck) {
+        setTimeout(window.checkConnection, 1000);
+    }
 })

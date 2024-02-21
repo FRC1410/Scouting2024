@@ -8,36 +8,42 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+  <script>
+      <% unless ENV["NO_HEALTHCHECK"] %>
+      window.doHealthcheck = true;
+      <% end %>
+  </script>
 </head>
 
 <body>
-
-<div class="top-bar text-center">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li><%= link_to '2024 Scouting', root_path %></li>
-      <li>
-        <%= link_to 'Competitions', competitions_path %>
-        <ul class="submenu menu vertical">
-          <% @competitions.each do |competition| %>
-            <li><%= link_to competition.name, competition %></li>
-          <% end %>
-        </ul>
-      </li>
-      <li><%= link_to 'Teams', teams_path %></li>
-    </ul>
+<% unless @nonav %>
+  <div class="top-bar text-center">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li><%= link_to '2024 Scouting', root_path %></li>
+        <li>
+          <%= link_to 'Competitions', competitions_path %>
+          <ul class="submenu menu vertical">
+            <% @competitions.each do |competition| %>
+              <li><%= link_to competition.name, competition %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li><%= link_to 'Teams', teams_path %></li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li class="menu-text">
+          <%= @user.name %>
+        </li>
+        <li>
+          <%= link_to 'Logout', '/logout' %>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li class="menu-text">
-        <%= @user.name %>
-      </li>
-      <li>
-        <%= link_to 'Logout', '/logout' %>
-      </li>
-    </ul>
-  </div>
-</div>
+<% end %>
 <%= yield %>
 </body>
 </html>

@@ -1,18 +1,18 @@
 <div class="cell small-9">
   <div>
     <%= button_to(score_url, class: "button expanded score-button") do %>
-      <h1>
+      <h2>
         <%= t(score_field) %>:
         <%= turbo_frame_tag score_field do %>
           <%= team_score_sheet[score_field] %>
         <% end %>
     <% end %>
-    </h1>
+    </h2>
   </div>
 </div>
 
 <div class="cell small-3">
   <%= button_to(undo_url, class: "button expanded alert score-button") do %>
-  <h1>UNDO</h1>
+  <h2>UNDO</h2>
   <% end %>
 </div>

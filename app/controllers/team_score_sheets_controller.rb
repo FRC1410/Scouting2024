@@ -172,6 +172,7 @@ class TeamScoreSheetsController < ApplicationController
   end
 
   def set_team_score_sheet
+    @nonav = true
     @team_score_sheet = TeamScoreSheet.find(params[:id])
     @match = Match.find(params[:match_id])
   end
