@@ -69,7 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_010129) do
     t.integer "score_trap", default: 0
     t.boolean "park", default: false
     t.boolean "onstage", default: false
-    t.boolean "harmony", default: false
     t.integer "score_speaker_amplified", default: 0
     t.integer "foul", default: 0
     t.boolean "defended", default: false
