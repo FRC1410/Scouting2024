@@ -56,7 +56,6 @@ sample_teams = Team.order("RANDOM()").limit(20)
       score_speaker_amplified: Random.rand(30),
       park: bools.sample,
       onstage: bools.sample,
-      harmony: bools.sample,
       defended: bools.sample,
       dead_on_field: bools.sample,
       foul: Random.rand(3),
