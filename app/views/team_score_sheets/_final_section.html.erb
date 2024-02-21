@@ -5,17 +5,17 @@
 </div>
 
 <%= render 'score_buttons',
-           score_field: :foul,
-           team_score_sheet: @team_score_sheet,
-           score_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
-           undo_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
-%>
-
-<%= render 'score_buttons',
            score_field: :score_trap,
            team_score_sheet: @team_score_sheet,
            score_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
+<%= render 'score_buttons',
+           score_field: :foul,
+           team_score_sheet: @team_score_sheet,
+           score_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
 <div class="cell small-6">
