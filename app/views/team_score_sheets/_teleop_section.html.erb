@@ -24,7 +24,7 @@
            undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
-<div class="cell small-5"><h1>PARKED?</h1></div>
+<div class="cell small-5"><h1>PARKED</h1></div>
 <div class="cell small-6">
   <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -47,7 +47,7 @@
   <% end %>
 </div>
 
-<div class="cell small-5"><h1>On Stage?</h1></div>
+<div class="cell small-5"><h1>ON STAGE</h1></div>
 <div class="cell small-6">
   <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -71,7 +71,7 @@
 </div>
 
 
-<div class="cell small-5"><h1>DEFENDED?</h1></div>
+<div class="cell small-5"><h1>DEFENDED AGAINST</h1></div>
 <div class="cell small-6">
   <%= form_with(url: defended_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -120,7 +120,7 @@
 </div>
 
 <%= render 'score_buttons',
-           score_field: :foul,
+           score_field: :FOULS,
            team_score_sheet: @team_score_sheet,
            score_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
