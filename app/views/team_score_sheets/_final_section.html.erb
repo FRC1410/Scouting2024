@@ -4,6 +4,79 @@
   <% end %>
 </div>
 
+<%= render 'score_buttons',
+           score_field: :foul,
+           team_score_sheet: @team_score_sheet,
+           score_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: foul_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
+<%= render 'score_buttons',
+           score_field: :score_trap,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_trap_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
+<div class="cell small-6">
+  <h2>PARKED</h2>
+</div>
+<div class="cell small-6 expanded">
+  <h2>ON STAGE</h2>
+</div>
+<div class="cell small-6">
+  <%= form_with(url: park_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "PARK",
+            @team_score_sheet.park?,
+            @team_score_sheet.park?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "park",
+            id: "park"
+          )
+      %>
+      <label class="switch-paddle" for="park">
+        <span class="show-for-sr">PARK</span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
+      </label>
+    </div>
+  <% end %>
+</div>
+<div class="cell small-6">
+  <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
+    <div class="switch large">
+      <%= check_box_tag(
+            "onstage",
+            @team_score_sheet.onstage?,
+            @team_score_sheet.onstage?,
+            onchange: "this.form.requestSubmit();",
+            class: "switch-input",
+            name: "onstage",
+            id: "onstage"
+          )
+      %>
+      <label class="switch-paddle" for="onstage">
+        <span class="show-for-sr">onstage</span>
+        <span class="switch-active" aria-hidden="true"><h2>Yes</h2></span>
+        <span class="switch-inactive" aria-hidden="true"><h2>No</h2></span>
+      </label>
+    </div>
+  <% end %>
+</div>
+</div>
+
+
+<%= render 'score_buttons',
+           score_field: :score_harmony,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
+
 <%= form_with(model: team_log, url: [team, team_log], data: { turbo: true }) do |form| %>
   <div class="grid-x grid-padding-x" data-controller="log_edit" data-action="<%= team_log.persisted? ? 'click->log_edit#edit' : '' %>" >
     <div  class="cell small-8 medium-12" data="click-toggle">
