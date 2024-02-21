@@ -21,7 +21,8 @@ class TeamLogsController < ApplicationController
   def create
     @team_log = TeamLog.new(
       team: @team,
-      log: params[:team_log][:log]
+      log: params[:team_log][:log],
+      team_score_sheet_id: params[:team_log][:team_score_sheet_id]
     )
 
     respond_to do |format|

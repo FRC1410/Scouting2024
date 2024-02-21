@@ -45,6 +45,7 @@
     </div>
   <% end %>
 </div>
+
 <div class="cell small-6">
   <%= form_with(url: onstage_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id)) do |form| %>
     <div class="switch large">
@@ -76,38 +77,23 @@
            undo_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
 
+<div class="cell expanded text-center"><h2>MATCH NOTES</h2></div>
 
-<%= form_with(model: team_log, url: [team, team_log], data: { turbo: true }) do |form| %>
-  <div class="grid-x grid-padding-x" data-controller="log_edit" data-action="<%= team_log.persisted? ? 'click->log_edit#edit' : '' %>" >
-    <div  class="cell small-8 medium-12" data="click-toggle">
-      <%== markdown.render(team_log.log.to_s) %>
-    </div>
-  </div>
-  <% if team_log.errors.any? %>
-    <div style="color: red" class="grid-x">
-      <ul class="cell">
-        <% team_log.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="grid-x grid-padding-x <%= team_log.persisted? ? 'hide' : '' %>" data="click-toggle">
-    <div class="cell small-6 medium-10">
+<%= form_with(model: team_log, url: [team, team_log], data: { turbo: true }, class: "cell small-12 medium-12 large-12", id: "notes") do |form| %>
+    <div class="cell small-12 medium-12 large-12">
       <%= form.text_area :log,
                          tabindex: 0,
                          rows: 5,
                          class: "input-group-field",
                          style: "white-space: pre-line",
                          value: team_log.log,
+                         "data-controller": "notes",
+                         "data-action": "focusout->notes#updateNote",
                          placeholder: "## You can put markdown in here.\n  * Stardate 2024 \n  * Release the Kraken!" %>
     </div>
-    <div class="cell small-6 medium-10">
-      <%= form.submit("SAVE", class: "button expanded", label: "Save") %>
-    </div>
-  </div>
+    <%= form.hidden_field "team_score_sheet_id", value: @team_score_sheet.id %>
 <% end %>
-
+<div class="cell expanded">&nbsp;</div>
 <div class="cell expanded">
   <%= button_to(
         scouting_complete_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, show_section: :teleop),

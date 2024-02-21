@@ -115,7 +115,7 @@ class TeamScoreSheetsController < ApplicationController
             match: @match,
             team_score_sheet: @team_score_sheet,
             team: @team_score_sheet.team,
-            team_log: TeamLog.new(team: @team_score_sheet.team),
+            team_log: @team_score_sheet.team_log || @team_score_sheet.build_team_log(team: @team_score_sheet.team),
             markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML),
           }
         )
