@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         post :toggle_auto, on: :member
         post :toggle_teleop, on: :member
         post :scouting_complete, on: :member
+        post :score_harmony, on: :member
       end
     end
   end

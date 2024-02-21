@@ -70,6 +70,12 @@
   <% end %>
 </div>
 
+<%= render 'score_buttons',
+           score_field: :score_harmony,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_harmony_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
 
 <div class="cell small-5"><h1>DEFENDED?</h1></div>
 <div class="cell small-6">

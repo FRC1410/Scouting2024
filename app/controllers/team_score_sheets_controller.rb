@@ -73,6 +73,28 @@ class TeamScoreSheetsController < ApplicationController
   def foul
     score(:foul)
   end
+
+  def score_harmony
+    current_score = TeamScoreSheet.where(id: params[:id]).pluck(score_harmony).first
+    increment = params[:increment].to_i
+    new_score = current_score + increment
+    if new_score >= 0
+      TeamScoreSheet.where(id: params[:id]).update_all("#{score_harmony} = #{new_score}")
+    elsif new_score >= 3
+      new_score = current_score
+    else
+      new_score = current_score
+    end
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          score_harmony,
+          body: new_score,
+          )
+      end
+    end
+  end
   def toggle_auto
     respond_to do |format|
       format.turbo_stream do
