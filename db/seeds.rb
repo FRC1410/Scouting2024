@@ -60,6 +60,7 @@ sample_teams = Team.order("RANDOM()").limit(20)
       defended: bools.sample,
       dead_on_field: bools.sample,
       foul: Random.rand(3),
+      score_harmony: Random.rand(2)
     )
   end
 end
