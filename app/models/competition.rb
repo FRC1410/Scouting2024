@@ -34,7 +34,13 @@ class Competition < ApplicationRecord
 
   def create_teams_from_file(file)
     team_numbers = []
-    CSV.foreach(file, 'r', headers: true) {|row| team_numbers << row[0]}
+    CSV.foreach(file, 'r', headers: true) {|row| team_numbers << row[0].to_i}
+    existing_teams = Team.where(number: team_numbers).pluck(:number)
+    missing_teams = team_numbers - existing_teams
+
+    if missing_teams.count > 0
+      return {success: false, missing_teams: missing_teams }
+    end
 
     teams = Team.where(number: team_numbers)
     self.update(teams: teams)

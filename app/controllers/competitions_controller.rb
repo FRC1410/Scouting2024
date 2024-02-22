@@ -64,8 +64,9 @@ class CompetitionsController < ApplicationController
   end
 
   def upload_teams
-    if !@competition.create_teams_from_file(params[:competition][:teams_file])
-      redirect_to competitions_url, alert: "Error creating teams"
+    result = @competition.create_teams_from_file(params[:competition][:teams_file])
+    if !result[:success]
+      redirect_to competitions_url, alert: "Error adding teams to competition. Teams missing: : #{result[:missing_teams].join(", ")}"
     end
   end
 
