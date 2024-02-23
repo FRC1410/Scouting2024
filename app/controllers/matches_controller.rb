@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
-  before_action :set_competition, only: %i[ index create ]
-  before_action :set_match, only: %i[ edit update destroy ]
+  before_action :set_competition, only: %i[ index create destroy ]
+  before_action :set_match, only: %i[ show edit update destroy ]
 
   # GET /matches or /matches.json
   def index
@@ -11,7 +11,9 @@ class MatchesController < ApplicationController
     @match = Match.new(competition: @competition)
   end
 
-  # GET /matches/1/edit
+  def show
+  end
+
   def edit
   end
 
@@ -69,7 +71,7 @@ class MatchesController < ApplicationController
     @match.destroy!
 
     respond_to do |format|
-      format.html { redirect_to matches_url, notice: "Match was successfully destroyed." }
+      format.html { redirect_to competition_matches_path(@competition), notice: "Match was successfully destroyed." }
       format.json { head :no_content }
     end
   end

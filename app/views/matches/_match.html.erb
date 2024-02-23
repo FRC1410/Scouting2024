@@ -7,7 +7,7 @@
 %>
 <tr id="<%= dom_id match %>" class="<%= new %> <%= hidden_class %>">
   <td>
-    <%= match.match_number %>
+    <%= link_to match.match_number, competition_match_path(match.competition, match)%>
   </td>
   <td>
     <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>

@@ -1,0 +1,17 @@
+<%= button_to "Delete this match", competition_match_path(@match.competition, @match), method: :delete, class: "button" %>
+<table class="hover">
+  <thead>
+  <tr>
+    <th><strong>Number</strong></th>
+    <th>Red Alliance Teams</th>
+    <th>Blue Alliance Teams</th>
+  </tr>
+  </thead>
+  <tbody id="matches">
+  <tr>
+    <td><strong><%= @match.match_number %></strong></td>
+    <td><%= @match.red_alliance.teams.pluck(:number).join(", ") %></td>
+    <td><%= @match.blue_alliance.teams.pluck(:number).join(", ") %></td>
+  </tr>
+  </tbody>
+</table>
