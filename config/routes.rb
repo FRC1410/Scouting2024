@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/healthcheck', to: 'healthcheck#online'
+  get '/login_no_google', to: 'login#login_no_google'
+  post '/login_no_google', to: 'login#login_bypass'
 
   resources :users
 

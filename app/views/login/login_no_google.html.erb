@@ -1,0 +1,14 @@
+<% mentor = [:craigs_discord_username,:randalls_discord_username, :jeannies_discord_username].sample %>
+<%= form_tag login_no_google_path  do |form| %>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+
+  <div>
+    <%= label_tag mentor %>
+    <%= text_field_tag :discord %>
+  </div>
+    <%= submit_tag %>
+  </div>
+<% end %>
