@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post :upload_matches, on: :member
     patch :upload_teams, on: :member
     resources :competition_teams
+    get :scores, on: :member
     resources :matches, except: [:new] do
       post :unlock, on: :member
       resources :team_score_sheets do

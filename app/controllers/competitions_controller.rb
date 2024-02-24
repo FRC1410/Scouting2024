@@ -1,9 +1,16 @@
 class CompetitionsController < ApplicationController
-  before_action :set_competition, only: %i[ show edit update destroy upload_matches upload_teams]
+  before_action :set_competition, only: %i[ show scores edit update destroy upload_matches upload_teams]
 
   # GET /competitions or /competitions.json
   def index
     @competitions = Competition.all
+  end
+
+  def scores
+    @matches = @competition.matches.eager_load(
+      red_alliance: [team_score_sheets: [:team, :user]],
+      blue_alliance: [team_score_sheets: [:team, :user]]
+    ).order(:match_number)
   end
 
   # GET /competitions/1 or /competitions/1.json
