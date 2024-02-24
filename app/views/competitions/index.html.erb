@@ -17,12 +17,16 @@
     <th><strong>Name</strong></th>
     <th><strong>Date</strong></th>
     <th><strong>Teams</strong></th>
+    <th>Matches</th>
     <th></th>
   </tr>
   </thead>
+  <tbody>
   <% @competitions.each do |competition| %>
     <%= render competition %>
   <% end %>
+
+  </tbody>
 </table>
 
 <%= link_to "New competition", new_competition_path %>

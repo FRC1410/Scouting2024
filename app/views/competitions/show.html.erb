@@ -1,8 +1,25 @@
 <p style="color: green"><%= notice %></p>
-<div>
-  <%= link_to "Edit this competition", edit_competition_path(@competition), class: "button" %>
+<div class="cell">
   <%= link_to "Back to competitions", competitions_path, class: "button" %>
 </div>
+<table id="competitions" class="hover">
+  <thead>
+  <tr>
+    <th><strong>Name</strong></th>
+    <th><strong>Date</strong></th>
+    <th><strong>Teams</strong></th>
+    <th><strong>Matches</strong></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= render @competition %>
+  </tbody>
+</table>
+<div class="grid-x">
+  <div class="cell">
+    <%= link_to "Edit this competition", edit_competition_path(@competition), class: "button" %>
+  </div>
+</div>
 
-<%= render @competition %>
 
