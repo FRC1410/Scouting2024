@@ -14,6 +14,9 @@
   <%= render @team %>
 </table>
 
+<div>
+  <%= link_to "Edit", edit_team_path(@team), class: "button"%>
+</div>
 <%= turbo_frame_tag "toggle_new" do %>
   <%= render "team_log_form", team: @team, team_log: TeamLog.new(team: @team), markdown: markdown %>
 <% end %>
@@ -37,9 +40,4 @@
 </table>
 
 
-<div>
-  <%= link_to "Edit this team", edit_team_path(@team) %> |
-  <%= link_to "Back to teams", teams_path %>
 
-  <%= button_to "Destroy this team", @team, method: :delete %>
-</div>

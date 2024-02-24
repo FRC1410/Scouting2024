@@ -1,10 +1,12 @@
-<h1>Editing competition</h1>
+<h1>Editing <%= @competition.name %></h1>
 
-<%= render "form", competition: @competition %>
+  <%= render "form", competition: @competition %>
 
-<br>
-
-<div>
-  <%= link_to "Show this competition", @competition %> |
-  <%= link_to "Back to competitions", competitions_path %>
+<div class="grid-x grid-container">
+  <div class="cell small-8">
+    <%= link_to "Cancel", @competition, class: "button" %>
+  </div>
+  <div class="cell small-8">
+    <%= link_to "Competitions", competitions_path, class: "button" %>
+  </div>
 </div>

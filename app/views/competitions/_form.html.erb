@@ -1,27 +1,29 @@
 <%= form_with(model: competition) do |form| %>
-  <% if competition.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
+  <div class="grid-x grid-container">
+    <% if competition.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
 
-      <ul>
-        <% competition.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% competition.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="cell small-12">
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+    <div class="cell small-12">
+      <%= form.label :date, style: "display: block" %>
+      <%= form.date_field :date %>
+    </div>
 
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <div class="cell small-12">
+      <%= form.submit class: "button" %>
+    </div>
   </div>
 <% end %>
