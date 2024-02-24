@@ -23,7 +23,7 @@
         <%= form.label :match_number %>
       </div>
       <div>
-        <%= form.number_field :match_number, tabindex: 0, pattern: "[0-9]+", value: match.competition.matches.maximum(:match_number) + 1 %>
+        <%= form.number_field :match_number, tabindex: 0, pattern: "[0-9]+", value: (match.competition.matches.maximum(:match_number) || 0) + 1 %>
       </div>
     </div>
 
