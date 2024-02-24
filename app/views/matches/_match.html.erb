@@ -7,57 +7,34 @@
 %>
 <tr id="<%= dom_id match %>" class="<%= new %> <%= hidden_class %>">
   <td>
-    <%= link_to match.match_number, competition_match_path(match.competition, match)%>
+    <%= link_to match.match_number, competition_match_path(match.competition, match) %>
   </td>
   <td>
     <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
-      <%=
-        class_list = if team_score_sheet.scouting_complete?
-                       " scouting-complete"
-                     else
-                       ""
-                     end
-
-        url = if team_score_sheet.locked?(@user)
-                "#"
-              else
-                edit_competition_match_team_score_sheet_path(
-                  match.competition,
-                  match,
-                  team_score_sheet)
-              end
-
-        link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
-                url,
-                disabled: team_score_sheet.locked?(@user),
-                class: "button alert match-button" + class_list
-      %>
+      <span id="<%= "teams_for_#{dom_id(team_score_sheet)}" %>">
+        <%= turbo_stream.append("teams_for_#{dom_id(team_score_sheet)}") do %>
+          <%= render "matches/match_team_list",
+                     match: match,
+                     team_score_sheet: team_score_sheet,
+                     user: @user,
+                     locked: false,
+                     red: true
+          %>
+        <% end %>
+      </span>
     <% end %>
   </td>
   <td>
     <% match.blue_alliance.team_score_sheets.each do |team_score_sheet| %>
-
-      <%=
-        class_list = if team_score_sheet.scouting_complete?
-                       " scouting-complete"
-                     else
-                       ""
-                     end
-
-        url = if team_score_sheet.locked?(@user)
-                "#"
-              else
-                edit_competition_match_team_score_sheet_path(
-                  match.competition,
-                  match,
-                  team_score_sheet)
-              end
-
-        link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
-                url,
-                disabled: team_score_sheet.locked?(@user),
-                class: "button match-button" + class_list
-      %>
+      <span id="<%= "teams_for_#{dom_id(team_score_sheet)}" %>">
+        <%= render "matches/match_team_list",
+                   match: match,
+                   team_score_sheet: team_score_sheet,
+                   user: @user,
+                   locked: false,
+                   red: false
+        %>
+      </span>
     <% end %>
   </td>
 </tr>

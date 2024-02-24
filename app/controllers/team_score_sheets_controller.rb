@@ -19,6 +19,18 @@ class TeamScoreSheetsController < ApplicationController
   def edit
     @team_score_sheet.update!(user: @user)
     @team_score_sheet.update!(currently_locked: true)
+    @match.broadcast_update_to(
+      "team_score_sheets",
+      target: "teams_for_#{dom_id(@team_score_sheet)}",
+      partial: 'matches/match_team_list',
+      locals: {
+        user: @user,
+        match: @match,
+        locked: true,
+        team_score_sheet: @team_score_sheet,
+        red: true
+      }
+    )
   end
 
   def score_amp_auto
@@ -81,103 +93,117 @@ class TeamScoreSheetsController < ApplicationController
     if new_score >= 3 || new_score < 0
       new_score = current_score
     else
-      TeamScoreSheet.where(id: params[:id]).update_all("#{:score_harmony} = #{new_score}")
-    end
+      TeamScoreSheet.where(id: params[:id]).update_all(" #{:score_harmony} = #{new_score}")
+      end
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          :score_harmony,
-          body: new_score,
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            :score_harmony,
+            body: new_score,
           )
+        end
       end
-    end
-  end
-  def toggle_auto
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          "toggle_auto",
-          partial: "team_score_sheets/#{params[:show_section]}_section",
-          locals: { match: @match, team_score_sheet: @team_score_sheet }
-        )
       end
-    end
-  end
 
-  def toggle_teleop
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          "toggle_auto",
-          partial: "team_score_sheets/#{params[:show_section]}_section",
+      def toggle_auto
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update(
+              "toggle_auto",
+              partial: "team_score_sheets/#{params[:show_section]}_section",
+              locals: { match: @match, team_score_sheet: @team_score_sheet }
+            )
+          end
+        end
+      end
+
+      def toggle_teleop
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update(
+              "toggle_auto",
+              partial: "team_score_sheets/#{params[:show_section]}_section",
+              locals: {
+                match: @match,
+                team_score_sheet: @team_score_sheet,
+                team: @team_score_sheet.team,
+                team_log: @team_score_sheet.team_log || @team_score_sheet.build_team_log(team: @team_score_sheet.team),
+                markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML),
+              }
+            )
+          end
+        end
+      end
+
+      def scouting_complete
+        @team_score_sheet.update!(currently_locked: false)
+        @team_score_sheet.update!(scouting_complete: true)
+
+        if @match.red_alliance.team_score_sheets.pluck(:scouting_complete).all? && @match.blue_alliance.team_score_sheets.pluck(:scouting_complete).all?
+          @match.update(completed: true)
+        end
+
+        @match.broadcast_update_to(
+          "team_score_sheets",
+          target: "teams_for_#{dom_id(@team_score_sheet)}",
+          partial: 'matches/match_team_list',
           locals: {
+            user: @user,
             match: @match,
+            locked: false,
             team_score_sheet: @team_score_sheet,
-            team: @team_score_sheet.team,
-            team_log: @team_score_sheet.team_log || @team_score_sheet.build_team_log(team: @team_score_sheet.team),
-            markdown: Redcarpet::Markdown.new(Redcarpet::Render::HTML),
+            red: true
           }
         )
+
+        redirect_to competition_matches_path(@match.competition)
       end
-    end
-  end
 
-  def scouting_complete
-    @team_score_sheet.update!(currently_locked: false)
-    @team_score_sheet.update!(scouting_complete: true)
+      private
 
-    if @match.red_alliance.team_score_sheets.pluck(:scouting_complete).all? && @match.blue_alliance.team_score_sheets.pluck(:scouting_complete).all?
-      @match.update(completed: true)
-    end
+      def score(location)
+        current_score = TeamScoreSheet.where(id: params[:id]).pluck(location).first
 
-    redirect_to competition_matches_path(@match.competition)
-  end
+        increment = params[:increment].to_i
 
-  private
+        new_score = current_score + increment
 
-  def score(location)
-    current_score = TeamScoreSheet.where(id: params[:id]).pluck(location).first
+        if new_score >= 0
+          TeamScoreSheet.where(id: params[:id]).update_all("#{location} = #{new_score}")
+        else
+          new_score = current_score
+        end
 
-    increment = params[:increment].to_i
-
-    new_score = current_score + increment
-
-    if new_score >= 0
-      TeamScoreSheet.where(id: params[:id]).update_all("#{location} = #{new_score}")
-    else
-      new_score = current_score
-    end
-
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          location,
-          body: new_score,
-        )
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update(
+              location,
+              body: new_score,
+            )
+          end
+        end
       end
-    end
-  end
 
-  def render_turbo(location)
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          dom_id(@team_score_sheet, location),
-          body: @team_score_sheet[location],
-          locals: { match: @match, team_score_sheet: @team_score_sheet }
-        )
+      def render_turbo(location)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update(
+              dom_id(@team_score_sheet, location),
+              body: @team_score_sheet[location],
+              locals: { match: @match, team_score_sheet: @team_score_sheet }
+            )
+          end
+        end
       end
-    end
-  end
 
-  def set_team_score_sheet
-    @nonav = true
-    @team_score_sheet = TeamScoreSheet.find(params[:id])
-    @match = Match.find(params[:match_id])
-  end
+      def set_team_score_sheet
+        @nonav = true
+        @team_score_sheet = TeamScoreSheet.find(params[:id])
+        @match = Match.find(params[:match_id])
+      end
 
-  def team_score_sheet_params
-    params.require(:team_score_sheet).permit(:match_id, :team_id, :action_id, :score)
-  end
-end
+      def team_score_sheet_params
+        params.require(:team_score_sheet).permit(:match_id, :team_id, :action_id, :score)
+      end
+      end

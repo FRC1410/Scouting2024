@@ -25,6 +25,7 @@
   </tr>
   </thead>
   <tbody id="matches">
+  <%= turbo_stream_from "team_score_sheets" %>
   <%= turbo_stream_from "matches" %>
   <%= turbo_stream.prepend :matches do %>
     <%= render @matches, { new: "" } %>

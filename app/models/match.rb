@@ -8,6 +8,7 @@ class Match < ApplicationRecord
                            new: "new"
                          },
                          target: "matches" }
+
   belongs_to :competition
   has_one :red_alliance, -> { where(color: :red) }, class_name: "Alliance", dependent: :destroy, autosave: true
   has_one :blue_alliance, -> { where(color: :blue) }, class_name: "Alliance", dependent: :destroy, autosave: true

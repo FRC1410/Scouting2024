@@ -1,0 +1,23 @@
+<%=
+  class_list = if team_score_sheet.scouting_complete?
+                 " scouting-complete"
+               else
+                 ""
+               end
+
+  class_list = class_list + (red ? " alert " : "")
+
+  url = if team_score_sheet.locked?(user)
+          "#"
+        else
+          edit_competition_match_team_score_sheet_path(
+            match.competition,
+            match,
+            team_score_sheet)
+        end
+
+  link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",
+          url,
+          disabled: locked || team_score_sheet.locked?(user),
+          class: "button match-button" + class_list
+%>
