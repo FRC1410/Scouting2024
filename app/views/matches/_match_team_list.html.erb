@@ -13,7 +13,9 @@
           edit_competition_match_team_score_sheet_path(
             match.competition,
             match,
-            team_score_sheet)
+            team_score_sheet,
+            red: red,
+          )
         end
 
   link_to "Scout #{team_score_sheet.team.number} #{team_score_sheet.user_initials}",

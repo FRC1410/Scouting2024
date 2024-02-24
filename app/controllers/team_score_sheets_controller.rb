@@ -28,7 +28,7 @@ class TeamScoreSheetsController < ApplicationController
         match: @match,
         locked: true,
         team_score_sheet: @team_score_sheet,
-        red: true
+        red: params[:red] == "true"
       }
     )
   end
