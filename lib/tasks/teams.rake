@@ -12,4 +12,18 @@ namespace :teams do
       end
     end
   end
+
+  task update_2024: :environment do
+    existing_teams = Team.pluck(:number)
+    CSV.open(Rails.root.join('db', 'fixtures', '2024teams.csv'), 'r', headers: true).each do |record|
+
+      values = record.to_h.symbolize_keys
+      if existing_teams.include? values[:number].to_i
+        next
+      else
+        p values
+        Team.create(values)
+      end
+    end
+  end
 end

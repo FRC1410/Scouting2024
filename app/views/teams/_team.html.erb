@@ -8,14 +8,15 @@
   </td>
 
   <td>
-    <%= link_to(team.location, team) %>
+    <%= link_to(team.location, team) if team.location.present? %>
   </td>
 
   <td>
-    <%= link_to(team.team_type, team) %>
+    <%= link_to(team.team_type, team) if team.location.present? %>
   </td>
   <td>
-    <img src="<%= team.logo %>" height="40px" width="40px"/>
+    <% if team.logo.present? %>
+      <img src="<%= team.logo %>" height="40px" width="40px"/>
+    <% end %>
   </td>
-
 </tr>
