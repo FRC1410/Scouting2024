@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   before_action :set_competition, only: %i[ index create destroy ]
-  before_action :set_match, only: %i[ show edit update destroy ]
+  before_action :set_match, only: %i[ show unlock edit update destroy ]
 
   # GET /matches or /matches.json
   def index
@@ -15,6 +15,12 @@ class MatchesController < ApplicationController
   end
 
   def edit
+  end
+
+  def unlock
+    @match.red_alliance.team_score_sheets.update(currently_locked: false)
+    @match.blue_alliance.team_score_sheets.update(currently_locked: false)
+    redirect_to competition_matches_path(@match.competition)
   end
 
   # POST /matches or /matches.json

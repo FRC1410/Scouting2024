@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     patch :upload_teams, on: :member
     resources :competition_teams
     resources :matches, except: [:new] do
+      post :unlock, on: :member
       resources :team_score_sheets do
         post :score_amp, on: :member
         post :score_trap, on: :member

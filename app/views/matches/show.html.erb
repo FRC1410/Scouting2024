@@ -1,4 +1,5 @@
 <%= button_to "Delete this match", competition_match_path(@match.competition, @match), method: :delete, class: "button" %>
+<%= button_to "Unlock All Scoring", unlock_competition_match_path(@match.competition, @match), method: :post, class: "button" %>
 <table class="hover">
   <thead>
   <tr>
