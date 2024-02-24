@@ -35,10 +35,14 @@
   </thead>
   <% @matches.each do |match| %>
     <% match.red_alliance.team_score_sheets.each do |score_sheet| %>
-      <%= render "score", match: match, score_sheet: score_sheet %>
+      <% if score_sheet.user.present? %>
+        <%= render "score", match: match, score_sheet: score_sheet %>
+      <% end %>
     <% end %>
     <% match.blue_alliance.team_score_sheets.each do |score_sheet| %>
-      <%= render "score", match: match, score_sheet: score_sheet %>
+      <% if score_sheet.user.present? %>
+        <%= render "score", match: match, score_sheet: score_sheet %>
+      <% end %>
     <% end %>
   <% end %>
 </table>
