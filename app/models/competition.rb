@@ -44,5 +44,7 @@ class Competition < ApplicationRecord
 
     teams = Team.where(number: team_numbers)
     self.update(teams: teams)
+
+    {success: true, missing_teams: missing_teams }
   end
 end
