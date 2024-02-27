@@ -1,8 +1,8 @@
 require "twilio-ruby"
 
 class MatchesController < ApplicationController
-  before_action :set_competition, only: %i[ index create destroy ]
-  before_action :set_match, only: %i[ show unlock edit update destroy ]
+  before_action :set_competition, only: %i[ notify index create destroy ]
+  before_action :set_match, only: %i[ notify show unlock edit update destroy ]
 
   # GET /matches or /matches.json
   def index
@@ -19,19 +19,22 @@ class MatchesController < ApplicationController
       account_sid = ENV["TWILIO_SSID"],
       auth_token = ENV["TWILIO_API"],
       twilio_phone = ENV["TWILIO_PHONE"],
-      user_phone = @user.user_phone,
     ]
 
     success = success && details.all?(&:present?)
 
-    if success
-      @client = Twilio::REST::Client.new account_sid, auth_token
-      message = @client.messages.create(
-        body: "Hello from Ruby",
-        to: user_phone,
-        from: twilio_phone,
-      )
-      success = success && message.error_code.blank?
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    @match.team_score_sheets.each do |score_sheet|
+      user = score_sheet.user
+      if success && user.present? && user.user_phone.present?
+        message = @client.messages.create(
+          body: "Heads up! You are scouting team #{score_sheet.team.number} for match #{@match.match_number} soon. Please go to the scouting app and prepare to scout!",
+          to: user.user_phone,
+          from: twilio_phone,
+          )
+        sleep 1.5
+      end
     end
 
     respond_to do |format|
