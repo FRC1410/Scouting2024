@@ -1,3 +1,5 @@
+require "twilio-ruby"
+
 class MatchesController < ApplicationController
   before_action :set_competition, only: %i[ index create destroy ]
   before_action :set_match, only: %i[ show unlock edit update destroy ]
@@ -9,6 +11,33 @@ class MatchesController < ApplicationController
       blue_alliance: [team_score_sheets: [:team, :user]]
     ).order("matches.match_number, team_score_sheets.id")
     @match = Match.new(competition: @competition)
+  end
+
+  def notify
+    success = true
+    details = [
+      account_sid = ENV["TWILIO_SSID"],
+      auth_token = ENV["TWILIO_API"],
+      twilio_phone = ENV["TWILIO_PHONE"],
+      user_phone = @user.user_phone,
+    ]
+
+    success = success && details.all?(&:present?)
+
+    if success
+      @client = Twilio::REST::Client.new account_sid, auth_token
+      message = @client.messages.create(
+        body: "Hello from Ruby",
+        to: user_phone,
+        from: twilio_phone,
+      )
+      success = success && message.error_code.blank?
+    end
+
+    respond_to do |format|
+      format.json { render json: { success: success } }
+      format.turbo_stream { render json: { success: success } }
+    end
   end
 
   def show

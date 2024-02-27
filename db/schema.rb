@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_21_064204) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_27_191355) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -100,6 +100,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_064204) do
     t.string "initials"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "user_phone"
+    t.boolean "user_phone_opt_in"
   end
 
   add_foreign_key "alliances", "matches"

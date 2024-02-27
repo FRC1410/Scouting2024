@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get :scores, on: :member
     resources :matches, except: [:new] do
       post :unlock, on: :member
+      post :notify, on: :member
       resources :team_score_sheets do
         post :score_amp, on: :member
         post :score_trap, on: :member
