@@ -6,6 +6,7 @@
     <th><strong>Number</strong></th>
     <th>Red Alliance Teams</th>
     <th>Blue Alliance Teams</th>
+    <th>Notify Scouts</th>
   </tr>
   </thead>
   <tbody id="matches">
@@ -13,6 +14,9 @@
     <td><strong><%= @match.match_number %></strong></td>
     <td><%= @match.red_alliance.teams.pluck(:number).join(", ") %></td>
     <td><%= @match.blue_alliance.teams.pluck(:number).join(", ") %></td>
+    <td>
+      <%= button_to "Notify", notify_competition_match_path(@match.competition, @match), form: {data: {turbo: true}}, class: "button" %>
+    </td>
   </tr>
   </tbody>
 </table>
