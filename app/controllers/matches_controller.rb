@@ -27,7 +27,7 @@ class MatchesController < ApplicationController
 
     @match.team_score_sheets.each do |score_sheet|
       user = score_sheet.user
-      if success && user.present? && user.user_phone.present?
+      if success && user.present? && user.user_phone.present? && user.user_phone_opt_in?
         message = @client.messages.create(
           body: "Heads up! You are scouting team #{score_sheet.team.number} for match #{@match.match_number} soon. Please go to the scouting app and prepare to scout!",
           to: user.user_phone,
