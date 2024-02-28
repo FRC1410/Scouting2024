@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       unless request.format.json?
         session[:return_to] = request.original_fullpath
       end
-      render 'layouts/login', layout: 'layouts/login'
+      return render 'layouts/login', layout: 'layouts/login'
     end
 
     @user = if ENV['AUTH_ENABLED'] == 'false'
@@ -23,7 +23,12 @@ class ApplicationController < ActionController::Base
 
   def check_user
     unless @user.present?
-      redirect_to '/users/new'
+      return redirect_to '/users/new'
+    end
+
+    if @user.user_phone_opt_in.nil? && @user.user_phone.nil?
+      flash[:alert] = "Please update your phone number or click 'Update User' to opt out of text messages."
+      redirect_to edit_user_path(@user)
     end
   end
 

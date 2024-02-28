@@ -35,7 +35,9 @@
     <div class="top-bar-right">
       <ul class="menu">
         <li class="menu-text">
-          <%= @user.name %>
+          <% if @user.present? %>
+            <%= link_to(@user.name, edit_user_path(@user))%>
+          <% end %>
         </li>
         <li>
           <%= link_to 'Logout', '/logout' %>

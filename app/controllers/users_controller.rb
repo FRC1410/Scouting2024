@@ -8,8 +8,17 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def edit
+  end
+
+  def update
+    @user.update(user_params)
+
+    redirect_to user_path(@user)
+  end
+
   def new
-    @user = User.new
+    @new_user = User.new
   end
 
   def create
@@ -29,6 +38,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :initials)
+    params.require(:user).permit(:first_name, :last_name, :initials, :user_phone, :user_phone_opt_in)
   end
 end

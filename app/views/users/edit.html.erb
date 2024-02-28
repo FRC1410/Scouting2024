@@ -1,0 +1,11 @@
+<% if flash[:alert] %>
+  <div class="callout alert" data-closable>
+    <%= flash[:alert] %>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+
+<%= render "form", user: @user %>
