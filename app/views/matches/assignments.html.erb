@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Scouting Assignments</h1>
+
+<table class="hover">
+  <thead>
+  <tr>
+    <th><strong>Number</strong></th>
+    <th>Red Alliance Teams</th>
+    <th>Blue Alliance Teams</th>
+  </tr>
+  </thead>
+  <tbody id="matches">
+  <% @matches.each do |match| %>
+    <%= render "assignment", match: match, users: @users %>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,60 @@
+<tr id="<%= dom_id match %>" style="border-bottom: 3px solid black">
+  <td style="width: 3em">
+    <%= match.match_number %>
+  </td>
+  <td data-controller="assignments" class="red-alliance">
+    <div class="grid-x grid-container">
+      <div class="cell small-8">
+        <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
+          <%= form_with(
+                model: team_score_sheet,
+                url: assign_scout_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet)
+              ) do |form| %>
+            <div>
+              <%= "Team: #{team_score_sheet.team.number}:" %>
+              <%= form.collection_select :user_id,
+                                         users,
+                                         :id,
+                                         :name,
+                                         { include_blank: true },
+                                         {
+                                           onchange: "this.form.requestSubmit()",
+                                           id: dom_id(team_score_sheet)
+                                         }
+              %>
+              <%= form.hidden_field "red", value: true %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </td>
+  <td data-controller="assignments" class="blue-alliance">
+    <div class="grid-x grid-container">
+      <div class="cell small-8">
+        <% match.blue_alliance.team_score_sheets.each do |team_score_sheet| %>
+          <%= form_with(
+                model: team_score_sheet,
+                url: assign_scout_competition_match_team_score_sheet_path(match.competition, match, team_score_sheet)
+              ) do |form| %>
+            <div>
+              <%= "Team: #{team_score_sheet.team.number}:" %>
+              <%= form.collection_select :user_id,
+                                         users,
+                                         :id,
+                                         :name,
+                                         { include_blank: true },
+                                         {
+                                           onchange: "this.form.requestSubmit()",
+                                           id: dom_id(team_score_sheet)
+                                         }
+              %>
+              <%= form.hidden_field "red", value: false %>
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </td>
+</tr>

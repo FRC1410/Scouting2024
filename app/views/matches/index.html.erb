@@ -11,6 +11,10 @@
 </div>
 
 <div>
+  <%= link_to "Scouting Assignments", competition_assignments_path(@match.competition), class: "button" %>
+</div>
+
+<div>
   Completed Matches: <%= @competition.matches.where(completed: true).count %>
   <a href="javascript:void(0)" id="show-complete" data-controller="matches" data-action="click->matches#showAll">Show</a>
   <a href="javascript:void(0)" class="hide" id="hide-complete" data-controller="matches" data-action="click->matches#hideComplete">Hide</a>
@@ -22,7 +26,6 @@
     <th><strong>Number</strong></th>
     <th>Red Alliance Teams</th>
     <th>Blue Alliance Teams</th>
-    <th>Notify Scouts</th>
   </tr>
   </thead>
   <tbody id="matches">

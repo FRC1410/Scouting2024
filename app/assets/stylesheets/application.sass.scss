@@ -26,6 +26,13 @@ $button-active-blue: #1669F2;
   width: 140px;
 }
 
+.red-alliance {
+  background-color: rgba($alert-color, 0.5);
+}
+.blue-alliance {
+  background-color: rgba($primary-color, 0.5);
+}
+
 .button.navigate {
   background-color: #8a8a8a;
 }

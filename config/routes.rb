@@ -10,10 +10,12 @@ Rails.application.routes.draw do
     patch :upload_teams, on: :member
     resources :competition_teams
     get :scores, on: :member
+    get :assignments, controller: :matches
     resources :matches, except: [:new] do
       post :unlock, on: :member
       post :notify, on: :member
       resources :team_score_sheets do
+        patch :assign_scout, on: :member
         post :score_amp, on: :member
         post :score_trap, on: :member
         post :score_speaker, on: :member

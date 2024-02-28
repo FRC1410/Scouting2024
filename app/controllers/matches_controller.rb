@@ -1,7 +1,7 @@
 require "twilio-ruby"
 
 class MatchesController < ApplicationController
-  before_action :set_competition, only: %i[ notify index create destroy ]
+  before_action :set_competition, only: %i[ assignments notify index create destroy ]
   before_action :set_match, only: %i[ notify show unlock edit update destroy ]
 
   # GET /matches or /matches.json
@@ -11,6 +11,14 @@ class MatchesController < ApplicationController
       blue_alliance: [team_score_sheets: [:team, :user]]
     ).order("matches.match_number, team_score_sheets.id")
     @match = Match.new(competition: @competition)
+  end
+
+  def assignments
+    @users = User.select(:id, :first_name, :last_name).order(:last_name)
+    @matches = @competition.matches.eager_load(
+      red_alliance: [team_score_sheets: [:team, :user]],
+      blue_alliance: [team_score_sheets: [:team, :user]]
+    ).order("matches.match_number, team_score_sheets.id")
   end
 
   def notify
@@ -32,7 +40,7 @@ class MatchesController < ApplicationController
           body: "Heads up! You are scouting team #{score_sheet.team.number} for match #{@match.match_number} soon. Please go to the scouting app and prepare to scout!",
           to: user.user_phone,
           from: twilio_phone,
-          )
+        )
         sleep 1.5
       end
     end
