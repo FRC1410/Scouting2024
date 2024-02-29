@@ -12,12 +12,12 @@ class PrizesController < ApplicationController
   def new
     user_ids = []
     @competition.matches.each do |match|
-      match.team_score_sheets.where(scouting_complete: true).where('team_score_sheets.updated_at > ?', Prize.maximum(:updated_at) || Date.new(2024, 01, 01)).map do |team_score_sheet|
+      match.team_score_sheets.where(scouting_complete: true).where('team_score_sheets.updated_at > ?', Prize.maximum(:updated_at) || Date.new(2024, 01, 01).order("RANDOM()")).map do |team_score_sheet|
         user_ids << team_score_sheet.user_id
       end
     end
 
-    user_ids = user_ids.uniq.filter(&:present?).sample(3)
+    user_ids = user_ids.uniq.filter(&:present?).sample(2)
 
     @users = User.where(id: user_ids)
     @prize = Prize.new
