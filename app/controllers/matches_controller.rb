@@ -18,7 +18,7 @@ class MatchesController < ApplicationController
     @matches = @competition.matches.eager_load(
       red_alliance: [team_score_sheets: [:team, :user]],
       blue_alliance: [team_score_sheets: [:team, :user]]
-    ).order("matches.match_number, team_score_sheets.id")
+    ).order("matches.match_number, team_score_sheets.created_at")
   end
 
   def notify
