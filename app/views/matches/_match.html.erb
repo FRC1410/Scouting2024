@@ -10,7 +10,7 @@
     <%= link_to match.match_number, competition_match_path(match.competition, match) %>
   </td>
   <td>
-    <% match.red_alliance.team_score_sheets.each do |team_score_sheet| %>
+    <% match.red_alliance.team_score_sheets.order(:created_at).each do |team_score_sheet| %>
       <span id="<%= "teams_for_#{dom_id(team_score_sheet)}" %>">
         <%= turbo_stream.append("teams_for_#{dom_id(team_score_sheet)}") do %>
           <%= render "matches/match_team_list",
@@ -25,7 +25,7 @@
     <% end %>
   </td>
   <td>
-    <% match.blue_alliance.team_score_sheets.each do |team_score_sheet| %>
+    <% match.blue_alliance.team_score_sheets.order(:created_at).each do |team_score_sheet| %>
       <span id="<%= "teams_for_#{dom_id(team_score_sheet)}" %>">
         <%= render "matches/match_team_list",
                    match: match,
