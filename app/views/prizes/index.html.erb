@@ -7,6 +7,7 @@
   <tr>
     <th><strong>Run At</strong></th>
     <th>Winners</th>
+    <th>Delete</th>
   </tr>
   </thead>
   <tbody id="prizes">
@@ -17,6 +18,9 @@
       </td>
       <td>
         <%= prize.users.map(&:name).join(", ") %>
+      </td>
+      <td>
+        <%= link_to "Delete", competition_prize_path(@competition, prize), method: :delete, class: "button" %>
       </td>
     </tr>
   <% end %>

@@ -1,5 +1,6 @@
 class PrizesController < ApplicationController
   before_action :set_competition
+  before_action :set_prize, only: %i[ destroy ]
 
   # GET /matches or /matches.json
   def index
@@ -37,7 +38,16 @@ class PrizesController < ApplicationController
     end
   end
 
+  def destroy
+    @prize.destroy!
+    redirect_to competition_prizes_path(@competition)
+  end
+
   private
+
+  def set_prize
+    @prize = Prize.find(params[:id])
+  end
 
   def set_competition
     @competition = Competition.find(params[:competition_id])
