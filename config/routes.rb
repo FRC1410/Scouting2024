@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :competitions do
     post :upload_matches, on: :member
     patch :upload_teams, on: :member
+    resources :prizes
     resources :competition_teams
     get :scores, on: :member
     get :assignments, controller: :matches

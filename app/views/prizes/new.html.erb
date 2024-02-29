@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>New Lottery</h1>
+<%= link_to "Rerun Lottery", new_competition_prize_path(@competition), class: "button" %>
+<%= form_with(model: @prize, url: competition_prizes_path(@competition, @prize)) do |form| %>
+  <table class="hover">
+    <thead>
+    <tr>
+      <th>Winners</th>
+    </tr>
+    </thead>
+    <tbody id="prizes">
+    <td>
+      <% @users.each do |user| %>
+      <%= user.name %>
+      <%= hidden_field_tag('prize[users][]', user.id) %>
+      <% end %>
+    </td>
+    </tbody>
+  </table>
+  <%= form.submit "Save Lottery Result", class: "button" %>
+<% end %>

@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Lotteries</h1>
+<%= link_to "Run New Lottery", new_competition_prize_path(@competition), class: "button" %>
+<table class="hover">
+  <thead>
+  <tr>
+    <th><strong>Run At</strong></th>
+    <th>Winners</th>
+  </tr>
+  </thead>
+  <tbody id="prizes">
+  <% @prizes.each do |prize| %>
+    <tr>
+      <td>
+        <%= prize.updated_at.strftime("%B %e, %Y at %I:%M %p") %>
+      </td>
+      <td>
+        <%= prize.users.map(&:name).join(", ") %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
