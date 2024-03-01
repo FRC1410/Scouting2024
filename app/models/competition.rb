@@ -7,6 +7,7 @@ class Competition < ApplicationRecord
 
   def create_matches_from_file(file)
     CSV.open(file, 'r', headers: true).each do |record|
+      values = record.to_h
       teams = Team.where(number: values.values_at("Red1", "Red2", "Red3")).all
 
       alliance_red = Alliance.create!(
