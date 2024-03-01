@@ -8,17 +8,21 @@ class Competition < ApplicationRecord
   def create_matches_from_file(file)
     CSV.open(file, 'r', headers: true).each do |record|
       values = record.to_h
-      teams = Team.where(number: values.values_at("Red1", "Red2", "Red3")).all
+      red1_teams = Team.find_by(number: values["Red1"])
+      red2_teams = Team.find_by(number: values["Red2"])
+      red3_teams = Team.find_by(number: values["Red3"])
 
       alliance_red = Alliance.create!(
         color: :red,
-        teams: teams
+        teams: [red1_teams, red2_teams, red3_teams]
       )
-      blue_teams = Team.where(number: values.values_at("Blue1", "Blue2", "Blue3"))
+      blue1_teams = Team.find_by(number: values["Blue1"])
+      blue2_teams = Team.find_by(number: values["Blue2"])
+      blue3_teams = Team.find_by(number: values["Blue3"])
 
       alliance_blue = Alliance.create!(
         color: :blue,
-        teams: blue_teams
+        teams: [blue1_teams, blue2_teams, blue3_teams]
       )
 
       begin
