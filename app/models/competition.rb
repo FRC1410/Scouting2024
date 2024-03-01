@@ -12,18 +12,29 @@ class Competition < ApplicationRecord
       red2_teams = Team.find_by(number: values["Red2"])
       red3_teams = Team.find_by(number: values["Red3"])
 
-      alliance_red = Alliance.create!(
+      alliance_red = Alliance.new(
         color: :red,
-        teams: [red1_teams, red2_teams, red3_teams]
       )
+
+      alliance_red.teams << red1_teams
+      alliance_red.teams << red2_teams
+      alliance_red.teams << red3_teams
+
+      alliance_red.save!
+
       blue1_teams = Team.find_by(number: values["Blue1"])
       blue2_teams = Team.find_by(number: values["Blue2"])
       blue3_teams = Team.find_by(number: values["Blue3"])
 
-      alliance_blue = Alliance.create!(
+      alliance_blue = Alliance.new(
         color: :blue,
-        teams: [blue1_teams, blue2_teams, blue3_teams]
       )
+
+      alliance_blue.teams << blue1_teams
+      alliance_blue.teams << blue2_teams
+      alliance_blue.teams << blue3_teams
+
+      alliance_blue.save!
 
       begin
         Match.create!(
