@@ -15,8 +15,8 @@ gem 'twilio-ruby', '~> 6.12.0'
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
+gem "pg"
 gem "sqlite3", "~> 1.4"
-gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 
 # Use the Puma web server [https://github.com/puma/puma]

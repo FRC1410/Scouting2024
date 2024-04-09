@@ -24,6 +24,7 @@ production:
   production:
     <<: *default
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") { '' } %>
+    user: scouting2024
+    password: FRC1410
     database: scouting_1410_production
 
