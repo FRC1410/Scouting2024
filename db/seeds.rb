@@ -8,6 +8,7 @@ utah = Competition.create(name: 'Utah')
 Competition.create(name: 'Houston')
 TeamLog.destroy_all
 Team.destroy_all
+PrizesUser.destroy_all
 User.destroy_all
 
 User.create!(
