@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_205025) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_09_225907) do
   create_table "alliances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_205025) do
     t.boolean "currently_locked", default: false
     t.boolean "scouting_complete", default: false
     t.integer "score_harmony", default: 0
+    t.integer "score_shuttle", default: 0
     t.index ["alliance_id"], name: "index_team_score_sheets_on_alliance_id"
     t.index ["team_id"], name: "index_team_score_sheets_on_team_id"
     t.index ["user_id"], name: "index_team_score_sheets_on_user_id"

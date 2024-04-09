@@ -16,6 +16,14 @@
            score_url: score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
            undo_url: score_amp_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
 %>
+
+<%= render 'score_buttons',
+           score_field: :score_shuttle,
+           team_score_sheet: @team_score_sheet,
+           score_url: score_shuttle_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: 1),
+           undo_url: score_shuttle_competition_match_team_score_sheet_path(@match.competition, @match.id, @team_score_sheet.id, increment: -1)
+%>
+
 <div class="cell small-6 "><h2>DEFENDED AGAINST</h2></div>
 <div class="cell small-6 expanded"><h2>DEAD FOR 15 SECONDS</h2></div>
 

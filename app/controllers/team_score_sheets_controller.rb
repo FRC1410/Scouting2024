@@ -60,6 +60,10 @@ class TeamScoreSheetsController < ApplicationController
     score(:score_amp)
   end
 
+  def score_shuttle
+    score(:score_shuttle)
+  end
+
   def onstage
     @team_score_sheet.onstage = !@team_score_sheet.onstage?
     @team_score_sheet.save
