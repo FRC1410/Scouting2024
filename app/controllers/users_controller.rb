@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
   skip_before_action :check_user
+  skip_before_action :set_auth, only: [:local_login]
 
   def show
+  end
+
+  def local_login
+    if params[:user_email].present?
+      session[:user_email] = params[:user_email]
+      session[:user_token] = params[:user_email]
+    else
+      return render 'layouts/login', layout: 'layouts/login'
+    end
+
+    redirect_to root_path
   end
 
   def index

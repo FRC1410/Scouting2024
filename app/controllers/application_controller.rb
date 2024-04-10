@@ -7,18 +7,15 @@ class ApplicationController < ActionController::Base
   private
 
   def set_auth
-    unless session[:user_token].present? || ENV['AUTH_ENABLED'] == 'false'
+    p ENV["AUTH_ENABLED"]
+    unless session[:user_token].present?
       unless request.format.json?
         session[:return_to] = request.original_fullpath
       end
       return render 'layouts/login', layout: 'layouts/login'
     end
 
-    @user = if ENV['AUTH_ENABLED'] == 'false'
-              User.first
-            else
-              User.find_by(email: session[:user_email])
-            end
+    @user = User.find_by(email: session[:user_email])
   end
 
   def check_user

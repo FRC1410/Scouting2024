@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/healthcheck', to: 'healthcheck#online'
+  post '/local_login', to: 'users#local_login'
 
   resources :users
-
   resources :competitions do
     post :upload_matches, on: :member
     patch :upload_teams, on: :member

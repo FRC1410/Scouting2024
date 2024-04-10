@@ -8,6 +8,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    @user = nil
+    session[:user_token] = nil
+    session[:user_email] = nil
+
     reset_session
     redirect_to root_path
   end
